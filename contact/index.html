@@ -55,21 +55,21 @@
                 <p class="siteHeader_label">Software Developer</p>
                 <nav class="siteHeader_nav" x-data>
                     <ol>
-                        <li :class="{ 'is-selected': $store.ui.currentPath === '/' }">
+                        <li :class="is-selected'">
                             <div class="_dot">&#x25cf;</div>
                             <a class="_text" href="index.html">Home</a>
                         </li>
-                        <li :class="{ 'is-selected': $store.ui.currentPath === '/projects/' }">
+                        <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
-                            <a class="_text" href="projects/index.html">Projects</a>
+                            <a class="_text" href="/projects/index.html">Projects</a>
                         </li>
-                        <li :class="{ 'is-selected': $store.ui.currentPath === '/info/' }">
+                        <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
-                            <a class="_text" href="info/index.html">Info</a>
+                            <a class="_text" href="/info/index.html">Info</a>
                         </li>
-                        <li :class="{ 'is-selected': $store.ui.currentPath === '/contact/' }">
+                        <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
-                            <a class="_text" href="contact/index.html">Contact</a>
+                            <a class="_text" href="/contact/index.html">Contact</a>
                         </li>
                     </ol>
                 </nav>
