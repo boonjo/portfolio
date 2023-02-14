@@ -41,13 +41,11 @@
                 <div class="frame_line frame_line-right"></div>
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
-            </div>
-            <div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
+            </div><div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
                 <div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'light' }">
                     <div class="_box"></div>
                     <div class="_text">Light</div>
-                </div>
-                <div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'dark' }">
+                </div><div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'dark' }">
                     <div class="_box"></div>
                     <div class="_text">Dark</div>
                 </div>
@@ -58,19 +56,20 @@
                 <nav class="siteHeader_nav" x-data>
                     <ol>
                         <li :class="is-selected'">
-                            <div class="_dot">&#x25cf;</div>                            
+                            <div class="_dot">&#x25cf;</div>
+                            <a class="_text" href="index.html">Home</a>
                         </li>
                         <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
-                            <a class="_text" href="projects.html">Projects</a>
+                            <a class="_text" href="/projects/projects.html">Projects</a>
                         </li>
                         <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
-                            <a class="_text" href="info.html">Info</a>
+                            <a class="_text" href="/info/info.html">Info</a>
                         </li>
                         <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
-                            <a class="_text" href="contact.html">Contact</a>
+                            <a class="_text" href="/contact/contact.html">Contact</a>
                         </li>
                     </ol>
                 </nav>
