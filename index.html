@@ -58,15 +58,7 @@
                 <nav class="siteHeader_nav" x-data>
                     <ol>
                         <li :class="is-selected'">
-                            <a class="_text" href="index.html">Home</a>
-                            <script>
-                                var textElement = document.getElementById("myText");
-                        
-                                textElement.addEventListener("click", function(){
-                                    textElement.innerHTML = ".";
-                                    textElement.classList.add("_dot");
-                                });
-                            </script>
+                            <div class="_dot">&#x25cf;</div>                            
                         </li>
                         <li :class="is-selected">
                             <div class="_dot">&#x25cf;</div>
