@@ -107,6 +107,37 @@ body{
 #EnterView ._t2{
     font-weight:200
 }
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  JavaScript:
+  
+  javascript
+  Copy code
+  const enterView = document.getElementById("EnterView");
+  
+  setTimeout(() => {
+    enterView.style.animation = "fadeOut 2s ease-in forwards";
+  }, 2000);
+  In the above example, the EnterView div is set to opacity: 0 and animated to fade in over 2 seconds using the fadeIn keyframes animation. After waiting for 2 seconds (using setTimeout), the fadeOut animation is applied to the EnterView div to fade it out over 2 seconds. The forwards animation-fill-mode is used to keep the EnterView div at its final state after the animation ends.
+  
 #Background{
     position:fixed;
     z-index:1;
