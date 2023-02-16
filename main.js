@@ -9,14 +9,12 @@ navLinks.forEach((link) => {
   });
 });
 
-function fadeOut() {
-  const enterView = document.querySelector('#EnterView');
-  enterView.style.opacity = '0';
-  enterView.style.transition = 'opacity 1s';
-  setTimeout(() => {
-    enterView.style.display = 'none';
-  }, 1000);
-}
+const enterView = document.querySelector('#EnterView');
+enterView.style.opacity = '0';
+enterView.style.transition = 'opacity 1s';
+setTimeout(() => {
+  enterView.style.display = 'none';
+}, 1000);
 
 
 // Create a Vue app to toggle the theme
