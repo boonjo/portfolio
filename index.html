@@ -24,7 +24,9 @@
             <div class="_t2">Portfolio</div>
         </div>        
         <div id="Page">
-            
+            <div id="Background">
+                <canvas></canvas>
+            </div>
             <div class="mask" id="Mask">
                 <div class="mask_top"></div>
                 <div class="mask_bottom"></div>
@@ -43,7 +45,7 @@
                 <div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'dark' }">
                     <div class="_box"></div>
                     <div class="_text">Dark</div>
-                </div>
+                
             </div>
         </div>
         <header class="siteHeader" id="SiteHeader">
