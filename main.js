@@ -9,6 +9,12 @@ navLinks.forEach((link) => {
   });
 });
 
+const enterView = document.getElementById("EnterView");
+
+setTimeout(() => {
+  enterView.style.animation = "fadeOut 2s ease-in forwards";
+}, 2000);
+
 // Create a Vue app to toggle the theme
 const app = Vue.createApp({
   data() {
