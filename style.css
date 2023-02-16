@@ -148,8 +148,8 @@ body{
     overflow:hidden;
     pointer-events:none
 }
-.mask_top,.mask_bottom
-{position:absolute;
+.mask_top,.mask_bottom{
+    position:absolute;
     left:0;
     width:100%;
     height:var(--pad);
