@@ -51,22 +51,22 @@
             <p class="siteHeader_label">Software Developer</p>
             <nav class="siteHeader_nav" x-data>
                 <ol>
-                    <li :class="{ 'is-selected': $route.path === '/' }">
+                    <li :class="{ 'is-selected': window.location.pathname === '/' }">
                         <div class="_dot">&#x25cf;</div>    
                         <a class="_text" href="index.html">Home</a>                        
-                    </li>
-                    <li :class="{ 'is-selected': $route.path === '/projects.html' }">
+                      </li>
+                      <li :class="{ 'is-selected': window.location.pathname === '/projects.html' }">
                         <div class="_dot">&#x25cf;</div>
                         <a class="_text" href="/projects.html">Projects</a>
-                    </li>
-                    <li :class="{ 'is-selected': $route.path === '/info.html' }">
+                      </li>
+                      <li :class="{ 'is-selected': window.location.pathname === '/info.html' }">
                         <div class="_dot">&#x25cf;</div>
                         <a class="_text" href="/info.html">Info</a>
-                    </li>
-                    <li :class="{ 'is-selected': $route.path === '/contact.html' }">
+                      </li>
+                      <li :class="{ 'is-selected': window.location.pathname === '/contact.html' }">
                         <div class="_dot">&#x25cf;</div>
                         <a class="_text" href="/contact.html">Contact</a>
-                    </li>                                        
+                      </li>                                                              
                 </ol>
             </nav>
         </header>
