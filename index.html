@@ -51,6 +51,10 @@
             <p class="siteHeader_label">Software Developer</p>
             <nav class="siteHeader_nav" x-data>
                 <ol>
+                    <li :class="{ 'is-selected': $store.ui.currentPath === '/index.html' }">
+                        <div class="_dot">&#x25cf;</div>
+                        <a class="_text" href="/index.html">Projects</a>
+                    </li>
                     <li :class="{ 'is-selected': $store.ui.currentPath === '/projects.html' }">
                         <div class="_dot">&#x25cf;</div>
                         <a class="_text" href="/projects.html">Projects</a>
