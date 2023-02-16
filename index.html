@@ -37,20 +37,16 @@
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
             </div>
-            <!--
-            <div x-data="{ 'theme': 'light' }">
-                <div class="theme" id="Theme" @click="theme = (theme === 'light') ? 'dark' : 'light'">
-                    <div class="theme_color" :class="{ 'is-selected': theme === 'light' }">
-                        <div class="_box"></div>
-                        <div class="_text">Light</div>
-                    </div>
-                    <div class="theme_color" :class="{ 'is-selected': theme === 'dark' }">
-                        <div class="_box"></div>
-                        <div class="_text">Dark</div>
-                    </div>
+            <div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
+                <div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'light' }">
+                    <div class="_box"></div>
+                    <div class="_text">Light</div>
                 </div>
-            </div>            
-            -->
+                <div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'dark' }">
+                    <div class="_box"></div>
+                    <div class="_text">Dark</div>
+                </div>
+            </div>
         </div>
         <header class="siteHeader" id="SiteHeader">
             <h1 class="siteHeader_title">Joonbo Shim</h1>
