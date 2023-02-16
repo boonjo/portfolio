@@ -67,7 +67,7 @@
                             <div class="_dot">&#x25cf;</div>
                             <a class="_text" href="info.html">Info</a>
                         </li>
-                        <li :class="is-selected">
+                        <li :class="{ 'is-selected': $store.ui.currentPath === '/' }">
                             <div class="_dot">&#x25cf;</div>
                             <a class="_text" href="contact.html">Contact</a>
                         </li>
