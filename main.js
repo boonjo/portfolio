@@ -34,4 +34,4 @@ setTimeout(() => {
 // });
 
 // Mount the Vue app to the #Theme element
-app.mount('#Theme');
+// app.mount('#Theme');
