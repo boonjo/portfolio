@@ -18,20 +18,20 @@ setTimeout(() => {
 
 
 // Create a Vue app to toggle the theme
-const app = Vue.createApp({
-  data() {
-    return {
-      ui: {
-        theme: 'light',
-      },
-    };
-  },
-  methods: {
-    toggleTheme() {
-      this.ui.theme = this.ui.theme === 'light' ? 'dark' : 'light';
-    },
-  },
-});
+// const app = Vue.createApp({
+//   data() {
+//     return {
+//       ui: {
+//         theme: 'light',
+//       },
+//     };
+//   },
+//   methods: {
+//     toggleTheme() {
+//       this.ui.theme = this.ui.theme === 'light' ? 'dark' : 'light';
+//     },
+//   },
+// });
 
 // Mount the Vue app to the #Theme element
 app.mount('#Theme');
