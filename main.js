@@ -14,24 +14,24 @@ enterView.style.opacity = '0';
 enterView.style.transition = 'opacity 1s';
 setTimeout(() => {
   enterView.style.display = 'none';
-}, 1000);
+}, 2000);
 
 
 // Create a Vue app to toggle the theme
-const app = Vue.createApp({
-  data() {
-    return {
-      ui: {
-        theme: 'light',
-      },
-    };
-  },
-  methods: {
-    toggleTheme() {
-      this.ui.theme = this.ui.theme === 'light' ? 'dark' : 'light';
-    },
-  },
-});
+// const app = Vue.createApp({
+//   data() {
+//     return {
+//       ui: {
+//         theme: 'light',
+//       },
+//     };
+//   },
+//   methods: {
+//     toggleTheme() {
+//       this.ui.theme = this.ui.theme === 'light' ? 'dark' : 'light';
+//     },
+//   },
+// });
 
 // Mount the Vue app to the #Theme element
 app.mount('#Theme');
