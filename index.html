@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="assets/favicon.png">
         <link rel="apple-touch-icon" href="assets/favicon.png">
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://unpkg.com/vuex@next"></script>
     </head>
     <body>      
         <div id="EnterView">
@@ -52,18 +54,38 @@
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
             </div>
-            <div id="app" x-data>
+            <div id="app">
                 <div class="theme" x-data="{ theme: $store.state.ui.theme }" @click="$store.commit('toggleTheme')">
-                  <div class="theme_color" :class="{ 'is-selected': theme === 'light' }">
-                    <div class="_box"></div>
-                    <div class="_text">Light</div>
-                  </div>
-                  <div class="theme_color" :class="{ 'is-selected': theme === 'dark' }">
-                    <div class="_box"></div>
-                    <div class="_text">Dark</div>
-                  </div>
+                    <div class="theme_color" :class="{ 'is-selected': theme === 'light' }">
+                        <div class="_box"></div>
+                        <div class="_text">Light</div>
+                    </div>
+                    <div class="theme_color" :class="{ 'is-selected': theme === 'dark' }">
+                        <div class="_box"></div>
+                        <div class="_text">Dark</div>
+                    </div>
                 </div>
-            </div>    
+            </div>
+            <script>
+                const store = Vuex.createStore({
+                    state() {
+                        return {
+                            ui: {
+                                theme: 'light',
+                            },       
+                        };
+                    },
+                    mutations: {
+                        toggleTheme(state) {
+                            state.ui.theme = state.ui.theme === 'light' ? 'dark' : 'light';
+                        },
+                    },
+                });
+          
+                const app = Vue.createApp({});
+                app.use(store);
+                app.mount('#app');
+            </script>
 
         </div>
         <header class="siteHeader" id="SiteHeader">
@@ -119,7 +141,5 @@
         <!-- Vuex library for state management -->
         <script src="https://unpkg.com/vuex@next"></script>
         <!-- Alpine.js library for interactivity -->
-        <script src="https://unpkg.com/alpinejs@3"></script>
-        <!-- Your custom JavaScript file -->
-        <script src="path/to/your/main.js"></script>
+        <script src="https://unpkg.com/alpinejs@3"></script>        
     </body>
