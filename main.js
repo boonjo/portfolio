@@ -1,3 +1,5 @@
+import Vuex from 'vuex';
+
 // define the app instance
 const app = Vue.createApp({
   // app options here
