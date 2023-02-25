@@ -23,6 +23,14 @@
             <div class="_t1">Joonbo Shim</div>
             <div class="_t2">Portfolio</div>
         </div>        
+        <script>
+            const enterView = document.querySelector('#EnterView');
+            enterView.style.opacity = '0';
+            enterView.style.transition = 'opacity 3s';
+            setTimeout(() => {
+                enterView.style.display = 'none';
+            }, 3000);
+        </script>
         <div id="Page">
             <div id="Background">
                 <canvas></canvas>
