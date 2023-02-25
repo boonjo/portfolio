@@ -1,10 +1,12 @@
 import { createApp } from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
-const store = new Vuex.Store({
-  state: {
-    ui: {
-      theme: 'light'
+const store = createStore({
+  state() {
+    return {
+      ui: {
+        theme: 'light'
+      }
     }
   },
   mutations: {

@@ -52,7 +52,7 @@
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
             </div>
-            <div class="theme" x-data="{ theme: $store.ui.theme }" @click="$store.ui.toggleTheme()">
+            <div class="theme" x-data="{ theme: $store.state.ui.theme }" @click="$store.commit('toggleTheme')">
                 <div class="theme_color" :class="{ 'is-selected': theme === 'light' }">
                   <div class="_box"></div>
                   <div class="_text">Light</div>
@@ -61,56 +61,58 @@
                   <div class="_box"></div>
                   <div class="_text">Dark</div>
                 </div>
-            </div>              
+              </div>            
         </div>
-        <header class="siteHeader" id="SiteHeader">
-            <h1 class="siteHeader_title">Joonbo Shim</h1>
-            <p class="siteHeader_label">Software Developer</p>
-            <nav class="siteHeader_nav" x-data>
-                <ol>
-                    <li :class="{ 'is-selected': window.location.pathname === '/' }">
-                        <div class="_dot">&#x25cf;</div>    
-                        <a class="_text" href="index.html">Home</a>                        
-                      </li>
-                      <li :class="{ 'is-selected': window.location.pathname === '/projects.html' }">
-                        <div class="_dot">&#x25cf;</div>
-                        <a class="_text" href="/projects.html">Projects</a>
-                      </li>
-                      <li :class="{ 'is-selected': window.location.pathname === '/info.html' }">
-                        <div class="_dot">&#x25cf;</div>
-                        <a class="_text" href="/info.html">Info</a>
-                      </li>
-                      <li :class="{ 'is-selected': window.location.pathname === '/contact.html' }">
-                        <div class="_dot">&#x25cf;</div>
-                        <a class="_text" href="/contact.html">Contact</a>
-                      </li>                                                              
-                </ol>
-            </nav>
-        </header>
-        <main class="content" id="Content" data-scroll="area">
-            <div class="content_inner" data-scroll="target">
-                <section class="page" id="home" data-page="home">
-                    <div class="page_content home">
-                        <p class="home_aboutme">
-                            <span>Born in 2000</span>
-                            <span>in Seoul, South Korea.</span>
-                            <span>I believe</span>
-                            <span>web design</span>
-                            <span>can be more</span>
-                            <span>diverse and inspiring.</span>
-                            <span>With a mission</span>
-                            <span>to present</span>
-                            <span>the possibilities</span>
-                            <span>of web design,</span>
-                            <span>I am pursuing</span>
-                            <span>new expressions</span>
-                            <span>through experiments</span>
-                            <span>and thoughts.</span>
-                        </p>
-                    </div>
-                </section>                    
-            </div>
-        </main>
+        <div id="app">
+            <header class="siteHeader" id="SiteHeader">
+                <h1 class="siteHeader_title">Joonbo Shim</h1>
+                <p class="siteHeader_label">Software Developer</p>
+                <nav class="siteHeader_nav" x-data>
+                    <ol>
+                        <li :class="{ 'is-selected': window.location.pathname === '/' }">
+                            <div class="_dot">&#x25cf;</div>    
+                            <a class="_text" href="index.html">Home</a>                        
+                        </li>
+                        <li :class="{ 'is-selected': window.location.pathname === '/projects.html' }">
+                            <div class="_dot">&#x25cf;</div>
+                            <a class="_text" href="/projects.html">Projects</a>
+                        </li>
+                        <li :class="{ 'is-selected': window.location.pathname === '/info.html' }">
+                            <div class="_dot">&#x25cf;</div>
+                            <a class="_text" href="/info.html">Info</a>
+                        </li>
+                        <li :class="{ 'is-selected': window.location.pathname === '/contact.html' }">
+                            <div class="_dot">&#x25cf;</div>
+                            <a class="_text" href="/contact.html">Contact</a>
+                        </li>                                                              
+                    </ol>
+                </nav>
+            </header>
+            <main class="content" id="Content" data-scroll="area">
+                <div class="content_inner" data-scroll="target">
+                    <section class="page" id="home" data-page="home">
+                        <div class="page_content home">
+                            <p class="home_aboutme">
+                                <span>Born in 2000</span>
+                                <span>in Seoul, South Korea.</span>
+                                <span>I believe</span>
+                                <span>web design</span>
+                                <span>can be more</span>
+                                <span>diverse and inspiring.</span>
+                                <span>With a mission</span>
+                                <span>to present</span>
+                                <span>the possibilities</span>
+                                <span>of web design,</span>
+                                <span>I am pursuing</span>
+                                <span>new expressions</span>
+                                <span>through experiments</span>
+                                <span>and thoughts.</span>
+                            </p>
+                        </div>
+                    </section>                    
+                </div>
+            </main>
+        </div>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script type="module" src="main.js"></script>       
