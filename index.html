@@ -18,11 +18,7 @@
         <link rel="icon" href="assets/favicon.png">
         <link rel="apple-touch-icon" href="assets/favicon.png">
     </head>
-    <body>        
-        <div id="EnterView">
-            <div class="_t1">Joonbo Shim</div>
-            <div class="_t2">Portfolio</div>
-        </div>        
+    <body>      
         <script>
             const enterView = document.querySelector('#EnterView');
             enterView.style.opacity = '0';
@@ -30,7 +26,11 @@
             setTimeout(() => {
                 enterView.style.display = 'none';
             }, 3000);
-        </script>
+        </script>  
+        <div id="EnterView">
+            <div class="_t1">Joonbo Shim</div>
+            <div class="_t2">Portfolio</div>
+        </div>        
         <div id="Page">
             <div id="Background">
                 <canvas></canvas>
