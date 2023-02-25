@@ -1,15 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createApp } from 'vue';
+import App from './App.vue';
+import store from './store';
 
-Vue.use(Vuex)
+createApp(App).use(store).mount('#app');
 
-export default new Vuex.Store({
-  state: {
-    theme: 'light'
-  },
-  mutations: {
-    toggleTheme(state) {
-      state.theme = state.theme === 'light' ? 'dark' : 'light'
-    }
-  }
-})
+const enterView = document.querySelector('#EnterView');
+enterView.style.opacity = '0';
+enterView.style.transition = 'opacity 3s';
+setTimeout(() => {
+  enterView.style.display = 'none';
+}, 3000);
