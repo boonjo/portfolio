@@ -65,28 +65,7 @@
                         <div class="_text">Dark</div>
                     </div>
                 </div>
-            </div>
-            <script>
-                const store = Vuex.createStore({
-                    state() {
-                        return {
-                            ui: {
-                                theme: 'light',
-                            },       
-                        };
-                    },
-                    mutations: {
-                        toggleTheme(state) {
-                            state.ui.theme = state.ui.theme === 'light' ? 'dark' : 'light';
-                        },
-                    },
-                });
-          
-                const app = Vue.createApp({});
-                app.use(store);
-                app.mount('#app');
-            </script>
-
+            </div>     
         </div>
         <header class="siteHeader" id="SiteHeader">
             <h1 class="siteHeader_title">Joonbo Shim</h1>
