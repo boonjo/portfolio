@@ -55,15 +55,13 @@
                 <div class="frame_line frame_line-bottom"></div>
             </div>
             <div id="app">
-                <div class="theme" x-data="{ theme: $store.state.ui.theme }" @click="$store.commit('toggleTheme')">
-                    <div class="theme_color" :class="{ 'is-selected': theme === 'light' }">
+                <div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
+                    <div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'light' }">
                         <div class="_box"></div>
                         <div class="_text">Light</div>
-                    </div>
-                    <div class="theme_color" :class="{ 'is-selected': theme === 'dark' }">
+                    </div><div class="theme_color" :class="{ 'is-selected': $store.ui.theme === 'dark' }">
                         <div class="_box"></div>
                         <div class="_text">Dark</div>
-                    </div>
                 </div>
             </div>     
         </div>
