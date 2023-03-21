@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Joonbo Shim</title>
+        <meta name="description" content="Software Developer in Austin">
+        <!-- <link rel="canonical" href="https://joonbo.com"> -->
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Joonbo Shim">
+        <meta property="og:title" content="Joonbo Shim">
+        <meta property="og:description" content="Software Developer in Austin">
+        <!--<meta property="og:url" content="https://joonbo.com">-->
+        <meta name="google" content="nositelinkssearchbox">
+        <meta name="google" content="notranslate">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="assets/favicon.png">
+        <link rel="apple-touch-icon" href="assets/favicon.png">
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://unpkg.com/vuex@next"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+    </head>
+    <body>      
+        <div id="EnterView">
+            <div class="_t1">Joonbo Shim</div>
+            <div class="_t2">Portfolio</div>
+        </div>
+        <script>
+            function hideEnterView() {
+              const enterView = document.querySelector('#EnterView');
+              enterView.style.opacity = '0';
+              enterView.style.transition = 'opacity 3.5s';
+              setTimeout(() => {
+                enterView.style.display = 'none';
+              }, 3500);
+            }
+            
+            // Call the function when the window has finished loading
+            window.onload = function() {
+              hideEnterView();
+            };
+          </script>        
+        <div id="Page">
+            <div id="Background">
+                <canvas></canvas>
+            </div>
+            <div class="mask" id="Mask">
+                <div class="mask_top"></div>
+                <div class="mask_bottom"></div>
+            </div>
+            <div class="frame" id="Frame">
+                <div class="frame_line frame_line-left"></div>
+                <div class="frame_line frame_line-right"></div>
+                <div class="frame_line frame_line-top"></div>
+                <div class="frame_line frame_line-bottom"></div>
+            </div>
+            <div class="theme" id="Theme" x-data @ click="$store.ui.toggleTheme()">
+                <div class="theme_color" : class="{ 'is-selected': $store.ui.theme === 'light' }">
+                    <div class="_box"></div>
+                    <div class="_text">Light</div>
+                </div><div class="theme_color" : class="{ 'is-selected': $store.ui.theme === 'dark' }">
+                    <div class="_box"></div>
+                    <div class="_text">Dark</div>
+            </div>
+        </div>
+        <header class="siteHeader" id="SiteHeader">
+            <h1 class="siteHeader_title">Joonbo Shim</h1>
+            <p class="siteHeader_label">Software Developer</p>
+            <nav class="siteHeader_nav" x-data>
+                <ol>
+                    <li :class="{ 'is-selected': window.location.pathname === '/index.html' }">
+                        <div class="_dot">&#x25cf;</div>    
+                        <a class="_text" href="index.html">Home</a>                        
+                    </li>
+                    <li :class="{ 'is-selected': window.location.pathname === '/projects.html' }">
+                        <div class="_dot">&#x25cf;</div>
+                        <a class="_text" href="/projects.html">Projects</a>
+                    </li>
+                    <li :class="{ 'is-selected': window.location.pathname === '/' }">
+                        <div class="_dot">&#x25cf;</div>
+                        <a class="_text" href="/info.html">Info</a>
+                    </li>
+                    <li :class="{ 'is-selected': window.location.pathname === '/contact.html' }">
+                        <div class="_dot">&#x25cf;</div>
+                        <a class="_text" href="/contact.html">Contact</a>
+                    </li>                                                              
+                </ol>
+            </nav>
+        </header>
+        <main class="content" id="Content" data-scroll="area">
+            <div class="content_inner" data-scroll="target">
+                <section class="page" data-page="info">
+                    <div class="page_content info">
+                        <div class="info_item info_item-1">
+                            <div class="info_content">
+                                <ul>
+                                    <li>
+                                        <a class="text-btn" href="https://twitter.com/P5_keita" target="_blank" rel="noopener">Twitter ↗</a>
+                                    </li>
+                                    <li>
+                                        <a class="text-btn" href="https://www.instagram.com/p5aholic/" target="_blank" rel="noopener">Instagram ↗</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info_item info_item-2">
+                            <div class="info_content">
+                                <ul>
+                                    <li>
+                                        <a class="text-btn" href="https://experiments.p5aholic.me" target="_blank" rel="noopener">experiments.p5aholic.me ↗</a>
+                                    </li>
+                                    <li>
+                                        <a class="text-btn" href="https://playground.p5aholic.me" target="_blank" rel="noopener">playground.p5aholic.me ↗</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info_item info_item-3">
+                            <div class="info_content">
+                                <ul>
+                                    <li>
+                                        <span class="is-light">Awwwards Independent of the Year<br></span>
+                                        <span>2020 Nominee</span>
+                                    </li>
+                                    <li>
+                                        <span class="is-light">Awwwards Site of the Day<br></span>
+                                        <span>Web Graphic Experiments</span>
+                                    </li>
+                                    <li>
+                                        <span class="is-light">Awwwards Site of the Day<br></span>
+                                        <span>100 DAYS OF POETRY</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>                  
+            </div>
+        </main>
+        <!-- Vue 3 library -->
+        <script src="https://unpkg.com/vue@next"></script>
+        <!-- Vuex library for state management -->
+        <script src="https://unpkg.com/vuex@next"></script>
+        <!-- Alpine.js library for interactivity -->
+        <script src="https://unpkg.com/alpinejs@3"></script>    
+        <script src="main.js"></script>
+    </body>
