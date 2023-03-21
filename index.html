@@ -20,13 +20,6 @@
         <script src="https://unpkg.com/vue@next"></script>
         <script src="https://unpkg.com/vuex@next"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-                  
-    </head>
-    <body>      
-        <div id="EnterView">
-            <div class="_t1">Joonbo Shim</div>
-            <div class="_t2">Portfolio</div>
-        </div>
         <script>
             function hideEnterView() {
               const enterView = document.querySelector('#EnterView');
@@ -41,7 +34,14 @@
             window.onload = function() {
               hideEnterView();
             };
-          </script>        
+          </script>                  
+    </head>
+    <body>      
+        <div id="EnterView">
+            <div class="_t1">Joonbo Shim</div>
+            <div class="_t2">Portfolio</div>
+        </div>
+        
         <div id="Page">
             <div id="Background">
                 <canvas></canvas>
@@ -57,11 +57,11 @@
                 <div class="frame_line frame_line-bottom"></div>
             </div>            
             <div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
-                <div class="theme_color" class="{ 'is-selected': $store.ui.theme === 'light' }">
+                <div class="theme_color": class="{ 'is-selected': $store.ui.theme === 'light' }">
                     <div class="_box"></div>
                     <div class="_text">Light</div>
                 </div>
-                <div class="theme_color" class="{ 'is-selected': $store.ui.theme === 'dark' }">
+                <div class="theme_color": class="{ 'is-selected': $store.ui.theme === 'dark' }">
                     <div class="_box"></div>
                     <div class="_text">Dark</div>
                 </div>
