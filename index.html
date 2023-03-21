@@ -20,13 +20,6 @@
         <script src="https://unpkg.com/vue@next"></script>
         <script src="https://unpkg.com/vuex@next"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-    </head>
-    <body>      
-        <div id="EnterView">
-            <div class="_t1">Joonbo Shim</div>
-            <div class="_t2">Portfolio</div>
-        </div>
         <script>
             function hideEnterView() {
               const enterView = document.querySelector('#EnterView');
@@ -42,6 +35,21 @@
               hideEnterView();
             };
           </script>        
+          <script type="module" src="/store.js"></script>
+          <script>
+            // Access the store object from the imported module
+            const { ui } = window.store;
+          
+            // Initialize the theme attribute
+            document.documentElement.setAttribute('data-theme', ui.theme);
+          </script>
+    </head>
+    <body>      
+        <div id="EnterView">
+            <div class="_t1">Joonbo Shim</div>
+            <div class="_t2">Portfolio</div>
+        </div>
+        
         <div id="Page">
             <div id="Background">
                 <canvas></canvas>
@@ -55,15 +63,7 @@
                 <div class="frame_line frame_line-right"></div>
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
-            </div>
-            <script type="module" src="/store.js"></script>
-            <script>
-              // Access the store object from the imported module
-              const { ui } = window.store;
-            
-              // Initialize the theme attribute
-              document.documentElement.setAttribute('data-theme', ui.theme);
-            </script>
+            </div>            
             <div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
                 <div class="theme_color" class="{ 'is-selected': $store.ui.theme === 'light' }">
                     <div class="_box"></div>
@@ -128,5 +128,4 @@
         <script src="https://unpkg.com/vuex@next"></script>
         <!-- Alpine.js library for interactivity -->
         <script src="https://unpkg.com/alpinejs@3"></script>    
-        <script src="main.js"></script>
     </body>
