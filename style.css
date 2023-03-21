@@ -17,9 +17,11 @@ html{
     -webkit-user-drag:none;
     -webkit-tap-highlight-color:rgba(0,0,0,0)
 }
+/*
 main,canvas{
     display:block
 }
+*/
 h1,h2,h3,h4,h5,h6{
     font-weight:inherit;
     font-size:inherit
