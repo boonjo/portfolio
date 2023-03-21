@@ -86,13 +86,7 @@
                 </ol>
             </nav>
         </header>
-        <script>
-            const app = Alpine.data('navigation', () => ({
-                isCurrentPath(path) {
-                    return window.location.pathname === path;
-                },
-            }));
-        </script>
+        
         <main class="content" id="Content" data-scroll="area">
             <div class="content_inner" data-scroll="target">
                 <section class="page" data-page="projects">
