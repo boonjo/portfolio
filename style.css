@@ -352,7 +352,10 @@ body{
 .project{
     padding:calc(var(--pad)*2 + 96px) calc(var(--pad)*2);
     text-align:right;
-    white-space:nowrap
+    white-space:nowrap;
+    overflow-x: hidden; /* disable horizontal scrolling */
+    overflow-y: auto; /* enable vertical scrolling */
+    
 }
 @media(min-width: 1280px){
     .project{
