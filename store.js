@@ -1,11 +1,11 @@
 const store = {
-    ui: {
-      theme: 'light',
-      toggleTheme() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', this.theme);
-      }
+  ui: {
+    theme: 'light',
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', this.theme);
     }
-  };
-  
-  export default store;
+  }
+};
+
+module.exports = store;

@@ -35,9 +35,8 @@
               hideEnterView();
             };
           </script>        
-          <script type="module" src="/store.js"></script>
+          <script src="/store.js"></script>
           <script>
-             import store from './store.js';
             // Access the store object from the imported module
             console.log(window.store); // check the structure of the store object
             const { ui } = window.store; // destructure the ui property from the store object
