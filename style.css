@@ -291,7 +291,7 @@ body{
     left:0;
     top:2px;
     font-size:10px;
-    opacity:0;
+    opacity:1;
     pointer-events:none;
     transition-property:opacity;
     transition-duration:.4s;
