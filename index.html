@@ -19,7 +19,7 @@
         <link rel="apple-touch-icon" href="assets/favicon.png">
         <script src="https://unpkg.com/vue@next"></script>
         <script src="https://unpkg.com/vuex@next"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>      
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
     <body>      
         <div id="EnterView">
@@ -40,7 +40,7 @@
             window.onload = function() {
               hideEnterView();
             };
-        </script>            
+          </script>        
         <div id="Page">
             <div id="Background">
                 <canvas></canvas>
@@ -54,16 +54,14 @@
                 <div class="frame_line frame_line-right"></div>
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
-            </div>            
+            </div>
             <div class="theme" id="Theme" x-data @ click="$store.ui.toggleTheme()">
                 <div class="theme_color" : class="{ 'is-selected': $store.ui.theme === 'light' }">
                     <div class="_box"></div>
                     <div class="_text">Light</div>
-                </div>
-                <div class="theme_color" : class="{ 'is-selected': $store.ui.theme === 'dark' }">
+                </div><div class="theme_color" : class="{ 'is-selected': $store.ui.theme === 'dark' }">
                     <div class="_box"></div>
                     <div class="_text">Dark</div>
-                </div>
             </div>
         </div>
         <header class="siteHeader" id="SiteHeader">
@@ -114,6 +112,9 @@
         </main>
         <!-- Vue 3 library -->
         <script src="https://unpkg.com/vue@next"></script>
+        <!-- Vuex library for state management -->
+        <script src="https://unpkg.com/vuex@next"></script>
         <!-- Alpine.js library for interactivity -->
         <script src="https://unpkg.com/alpinejs@3"></script>    
+        <script src="main.js"></script>
     </body>
