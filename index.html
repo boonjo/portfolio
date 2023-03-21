@@ -56,6 +56,14 @@
                 <div class="frame_line frame_line-top"></div>
                 <div class="frame_line frame_line-bottom"></div>
             </div>
+            <script type="module" src="path/to/store.js"></script>
+            <script>
+              // Access the store object from the imported module
+              const { ui } = window.store;
+            
+              // Initialize the theme attribute
+              document.documentElement.setAttribute('data-theme', ui.theme);
+            </script>
             <div class="theme" id="Theme" x-data @click="$store.ui.toggleTheme()">
                 <div class="theme_color" class="{ 'is-selected': $store.ui.theme === 'light' }">
                     <div class="_box"></div>
