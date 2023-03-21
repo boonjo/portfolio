@@ -22,26 +22,7 @@
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
     </head>
-    <body>      
-        <div id="EnterView">
-            <div class="_t1">Joonbo Shim</div>
-            <div class="_t2">Portfolio</div>
-        </div>
-        <script>
-            function hideEnterView() {
-              const enterView = document.querySelector('#EnterView');
-              enterView.style.opacity = '0';
-              enterView.style.transition = 'opacity 3.5s';
-              setTimeout(() => {
-                enterView.style.display = 'none';
-              }, 3500);
-            }
-            
-            // Call the function when the window has finished loading
-            window.onload = function() {
-              hideEnterView();
-            };
-          </script>        
+    <body>            
         <div id="Page">
             <div id="Background">
                 <canvas></canvas>
@@ -70,8 +51,8 @@
             <p class="siteHeader_label">Software Developer</p>
             <nav class="siteHeader_nav" x-data>
                 <ol>
-                    <li :class="{ 'is-selected': window.location.pathname === '/index.html' }">
-                        <a class="_text" href="/index.html">Home</a>                        
+                    <li :class="{ 'is-selected': window.location.pathname === '/home.html' }">
+                        <a class="_text" href="/home.html">Home</a>                        
                     </li>
                     <li :class="{ 'is-selected': window.location.pathname === '/projects.html' }">
                         <a class="_text" href="/projects.html">Projects</a>
