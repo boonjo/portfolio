@@ -34,16 +34,7 @@
             window.onload = function() {
               hideEnterView();
             };
-          </script>        
-          <script src="/store.js"></script>
-          <script>
-            // Access the store object from the imported module
-            console.log(window.store); // check the structure of the store object
-            const { ui } = window.store; // destructure the ui property from the store object
-          
-            // Initialize the theme attribute
-            document.documentElement.setAttribute('data-theme', ui.theme);
-          </script>
+          </script>                  
     </head>
     <body>      
         <div id="EnterView">
