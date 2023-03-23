@@ -6,8 +6,3 @@ function hideEnterView() {
       enterView.style.display = 'none';
     }, 3500);
   }
-  
-  // Call the function when the window has finished loading
-  window.onload = function() {
-    hideEnterView();
-  };
