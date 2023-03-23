@@ -1,41 +1,53 @@
-function hideEnterView() {
-    const enterView = document.querySelector('#EnterView');
-    enterView.style.opacity = '0';
-    enterView.style.transition = 'opacity 3.5s';
-    setTimeout(() => {
-      enterView.style.display = 'none';
-    }, 3500);
+// Function to toggle the mobile navigation menu
+function toggleMenu() {
+    var menu = document.getElementById("mobile-menu");
+    if (menu.style.display === "block") {
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
   }
   
-  // Call the function when the window has finished loading
-  window.onload = function() {
-    hideEnterView();
-  };
-
-window.onload = function() {
-    document.getElementById("EnterView").onclick = function() {
-      window.location.href = "#AboutMe";
-    }
-  };
-  
-  
-  document.addEventListener("DOMContentLoaded", function() {
-    var navLinks = document.querySelectorAll(".nav-link");
-    var navItems = document.querySelectorAll(".nav-item");
-    
+  // Function to update the active navigation link
+  function updateActiveLink() {
+    var navLinks = document.getElementsByClassName("nav-link");
+    var currentPath = window.location.pathname;
     for (var i = 0; i < navLinks.length; i++) {
-      navLinks[i].addEventListener("click", function(e) {
-        e.preventDefault();
-        var target = this.getAttribute("href");
-        var targetElement = document.querySelector(target);
-        
-        for (var j = 0; j < navItems.length; j++) {
-          navItems[j].classList.remove("active");
-        }
-        
-        this.parentElement.classList.add("active");
-        targetElement.scrollIntoView({ behavior: "smooth" });
-      });
+      var linkPath = navLinks[i].getAttribute("href");
+      if (currentPath === linkPath) {
+        navLinks[i].classList.add("active");
+      } else {
+        navLinks[i].classList.remove("active");
+      }
     }
+  }
+  
+  // Call the toggleMenu function when the mobile menu icon is clicked
+  var menuIcon = document.getElementById("menu-icon");
+  menuIcon.addEventListener("click", toggleMenu);
+  
+  // Call the updateActiveLink function on page load and on hashchange
+  window.addEventListener("load", updateActiveLink);
+  window.addEventListener("hashchange", updateActiveLink);
+  
+  // Function for EnterView animation
+  function EnterView(target, offset) {
+    var targetElement = document.querySelector(target);
+  
+    var elementHeight = targetElement.offsetHeight;
+    var windowHeight = window.innerHeight;
+    var scrollY = window.scrollY || window.pageYOffset;
+  
+    var targetPosition = targetElement.getBoundingClientRect().top + scrollY;
+    var buffer = offset || 0;
+  
+    if (scrollY > targetPosition - windowHeight + buffer) {
+      targetElement.classList.add("enter-view");
+    }
+  }
+  
+  // Call the EnterView function on scroll
+  window.addEventListener("scroll", function () {
+    EnterView("#EnterView");
   });
   
