@@ -58,6 +58,7 @@
             <nav class="siteHeader_nav" x-data>
                 <ol>
                     <li :class="{ 'is-selected': window.location.pathname === '/' }">
+                        <a class="_text" href="#home">Home</a>
                         <div class="_dot">&#x25cf;</div>  
                         <br>                          
                     </li>
@@ -80,30 +81,32 @@
             </script>            
         </video>   
         <div class='bgv placeholder'></div>
-        <main class="content" id="Content" data-scroll="area">
-            <div class="content_inner" data-scroll="target">
-                <section class="page" id="home" data-page="home">
-                    <div class="page_content home">
-                        <p class="home_aboutme">
-                            <span>Born in 2000</span>
-                            <span>in Seoul, South Korea,</span>
-                            <span>I hold the conviction</span>
-                            <span>that programming</span>
-                            <span>has the potential</span>
-                            <span>to be more varied and inspiring.</span>
-                            <span>With the objective</span>
-                            <span>of showcasing</span>
-                            <span>the boundless possibilities</span>
-                            <span>of programming</span>
-                            <span>I am pursuing</span>
-                            <span>innovative forms of</span>
-                            <span>expression through</span>
-                            <span>experimentation and contemplation.</span>
-                        </p>
-                    </div>
-                </section>                    
-            </div>
-        </main>
+        <div id="#home">
+            <main class="content" id="Content" data-scroll="area">
+                <div class="content_inner" data-scroll="target">
+                    <section class="page" id="home" data-page="home">
+                        <div class="page_content home">
+                            <p class="home_aboutme">
+                                <span>Born in 2000</span>
+                                <span>in Seoul, South Korea,</span>
+                                <span>I hold the conviction</span>
+                                <span>that programming</span>
+                                <span>has the potential</span>
+                                <span>to be more varied and inspiring.</span>
+                                <span>With the objective</span>
+                                <span>of showcasing</span>
+                                <span>the boundless possibilities</span>
+                                <span>of programming</span>
+                                <span>I am pursuing</span>
+                                <span>innovative forms of</span>
+                                <span>expression through</span>
+                                <span>experimentation and contemplation.</span>
+                            </p>
+                        </div>
+                    </section>                    
+                </div>
+            </main>
+        </div>
         <!-- Vue 3 library -->
         <script src="https://unpkg.com/vue@next"></script>
         <!-- Vuex library for state management -->
