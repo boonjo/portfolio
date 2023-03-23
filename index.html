@@ -58,18 +58,18 @@
             <nav class="siteHeader_nav" x-data>
                 <ol>
                     <li :class="{ 'is-selected': window.location.pathname === '/' }">
-                        <a class="_text" href="#home">Home</a>
-                        <div class="_dot">&#x25cf;</div>  
+                        <a class="_text" href="#" onclick="return show('home','projects','info','contact');">Home</a>
+                        <!--<div class="_dot">&#x25cf;</div> -->
                         <br>                          
                     </li>
                     <li :class="{ 'is-selected': window.location.pathname === '/projects.html' }">
-                        <a class="_text" href="/projects.html">Projects</a>
+                        <a class="_text" href="#" onclick="return show('projects','home','info','contact');">Projects</a>
                     </li>
                     <li :class="{ 'is-selected': window.location.pathname === '/info.html' }">
-                        <a class="_text" href="/info.html">Info</a>
+                        <a class="_text" href="#" onclick="return show('info','home','projects','contact');">Info</a>
                     </li>
                     <li :class="{ 'is-selected': window.location.pathname === '/contact.html' }">
-                        <a class="_text" href="/contact.html">Contact</a>
+                        <a class="_text" href="#" onclick="return show('contact','home','projects','info');">Contact</a>
                     </li>                                                              
                 </ol>
             </nav>
@@ -81,7 +81,7 @@
             </script>            
         </video>   
         <div class='bgv placeholder'></div>
-        <div id="#home">
+        <div id="home">
             <main class="content" id="Content" data-scroll="area">
                 <div class="content_inner" data-scroll="target">
                     <section class="page" id="home" data-page="home">
@@ -104,6 +104,107 @@
                             </p>
                         </div>
                     </section>                    
+                </div>
+            </main>
+        </div>
+        <div id="projects" style="display:none">
+            <main class="content" id="Content" data-scroll="area">
+                <div class="content_inner" data-scroll="target">
+                    <section class="page" data-page="projects">
+                        <div class="page_content project">
+                            <div class="project_section">
+                                <h2 class="project_heading">&#x25a0; Projects (Design & Develop)</h2>
+                                <div class="project_list">
+                                    <a class="project_item text-btn" href="https://joonbo.com" target="_blank" rel="noopener">
+                                        <div class="project_title">Joonbo Shim Portfolio</div>
+                                        <div class="project_info">2023 / Personal</div>
+                                    </a>
+                                    <a class="project_item text-btn" href="https://github.com/boonjo/Menu-Ordering-System" target="_blank" rel="noopener">
+                                        <div class="project_title">Menu Ordering System</div>
+                                        <div class="project_info">2022 / Assessment</div>
+                                    </a>
+                                    <a class="project_item text-btn" href="https://github.com/boonjo/Fakestagram" target="_blank" rel="noopener">
+                                        <div class="project_title">Fakestagram</div>
+                                        <div class="project_info">2022 / Personal</div>
+                                    </a>
+                                    <a class="project_item text-btn" href="https://github.com/boonjo/WebsiteChecker" target="_blank" rel="noopener">
+                                        <div class="project_title">Website Checker</div>
+                                        <div class="project_info">2021 / Internship</div>
+                                    </a>
+                                    <a class="project_item text-btn" href="https://github.com/boonjo/Simple-Bomb-Sweeper" target="_blank" rel="noopener">
+                                        <div class="project_title">Simple Bomb Sweeper</div>
+                                        <div class="project_info">2021 / Personal</div>
+                                    </a>
+                                    <a class="project_item text-btn" href="https://github.com/boonjo/statsbomb-visualization" target="_blank" rel="noopener">
+                                        <div class="project_title">Statsbomb Visualization</div>
+                                        <div class="project_info">2021 / Personal</div>
+                                    </a>                          
+                                </div>
+                            </div>
+                        </div>
+                    </section>                    
+                </div>
+            </main>
+        </div>
+        <div id="info" style="display:none">
+            <main class="content" id="Content" data-scroll="area">
+                <div class="content_inner" data-scroll="target">
+                    <section class="page" data-page="info">
+                        <div class="page_content info">
+                            <div class="info_item info_item-1">
+                                <div class="info_content">
+                                    <ul>
+                                        <li>
+                                            <a class="text-btn" href="https://twitter.com/jjjjoonbo" target="_blank" rel="noopener">Twitter ↗</a>
+                                        </li>
+                                        <li>
+                                            <a class="text-btn" href="https://www.instagram.com/joonbo/" target="_blank" rel="noopener">Instagram ↗</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="info_item info_item-2">
+                                <div class="info_content">
+                                    <ul>
+                                        <li>
+                                            <a class="text-btn" href="https://www.buymeacoffee.com/joonbos" target="_blank" rel="noopener">buymeacoffee.com/joonbos ↗</a>
+                                        </li>
+                                        <li>
+                                            <a class="text-btn" href="https://letterboxd.com/boonjo/" target="_blank" rel="noopener">letterboxd.com/boonjo ↗</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="info_item info_item-3">
+                                <div class="info_content">
+                                    <ul>
+                                        <li>
+                                            <span class="is-light">Samsung<br></span>
+                                            <span>Software Engineer</span>
+                                        </li>                                 
+                                        <li>
+                                            <span class="is-light">Class of 2022<br></span>
+                                            <span>UW Madison Computer Science</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>                  
+                </div>
+            </main>
+        </div>
+        <div id="contact" style="display:none">
+            <main class="content" id="Content" data-scroll="area">
+                <div class="content_inner" data-scroll="target">
+                    <section class="page" data-page="contact">
+                        <div class="page_content contact">
+                            <div class="contact_wrap">
+                                <a class="contact_text jp text-btn" href="mailto: joonbo@gmail.com" target="_blank" rel="noopener">문의하기 ↗</a>
+                                <a class="contact_text en text-btn" href="mailto: joonbo@gmail.com" target="_blank" rel="noopener">Contact Form ↗</a>
+                            </div>
+                        </div>
+                    </section>                  
                 </div>
             </main>
         </div>
