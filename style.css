@@ -47,15 +47,18 @@ ol,ul{
 @font-face{
     font-family:"Neue Montreal";
     font-weight:200;
-    src:url("../font/PPNeueMontreal-Thin.woff2") format("woff2")
+    src:url("../font/PPNeueMontreal-Thin.woff2") format("woff2");
+    font-display: swap;
 }
 @font-face{
     font-family:"Neue Montreal";
-    font-weight:400;src:url("../font/PPNeueMontreal-Book.woff2") format("woff2")
+    font-weight:400;src:url("../font/PPNeueMontreal-Book.woff2") format("woff2");
+    font-display: swap;
 }
 @font-face{
     font-family:"Neue Montreal";
-    font-weight:600;src:url("../font/PPNeueMontreal-SemiBold.woff2") format("woff2")
+    font-weight:600;src:url("../font/PPNeueMontreal-SemiBold.woff2") format("woff2");
+    font-display: swap;
 }
 html,body{
     height:100%
