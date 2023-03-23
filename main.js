@@ -1,21 +1,13 @@
-  // Function for EnterView animation
-  function EnterView(target, offset) {
-    var targetElement = document.querySelector(target);
-  
-    var elementHeight = targetElement.offsetHeight;
-    var windowHeight = window.innerHeight;
-    var scrollY = window.scrollY || window.pageYOffset;
-  
-    var targetPosition = targetElement.getBoundingClientRect().top + scrollY;
-    var buffer = offset || 0;
-  
-    if (scrollY > targetPosition - windowHeight + buffer) {
-      targetElement.classList.add("enter-view");
-    }
+function hideEnterView() {
+    const enterView = document.querySelector('#EnterView');
+    enterView.style.opacity = '0';
+    enterView.style.transition = 'opacity 3.5s';
+    setTimeout(() => {
+      enterView.style.display = 'none';
+    }, 3500);
   }
   
-  // Call the EnterView function on scroll
-  window.addEventListener("scroll", function () {
-    EnterView("#EnterView");
-  });
-  
+  // Call the function when the window has finished loading
+  window.onload = function() {
+    hideEnterView();
+  };
