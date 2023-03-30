@@ -123,14 +123,6 @@ body{
     font-size:30px
 }
 
-#EnterView ._t1{
-    font-weight:400
-}
-
-#EnterView ._t2{
-    font-weight:200
-}
-
 @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -589,8 +581,8 @@ svg {
   }
   .animated-title > div.text-top div {
     font-weight:400;
-    animation: showTopText .5s;
-    animation-delay: 0.5s;
+    animation: showTopText .4s;
+    animation-delay: 0.1s;
     animation-fill-mode: forwards;
     bottom: 0;
     transform: translate(0, 100%);
@@ -603,8 +595,8 @@ svg {
   }
   .animated-title > div.text-bottom div {
     font-weight:200;
-    animation: showBottomText 0.5s;
-    animation-delay: 1.2s;
+    animation: showBottomText 0.4s;
+    animation-delay: .5s;
     animation-fill-mode: forwards;
     top: 0;
     transform: translate(0, -100%);
