@@ -1,11 +1,12 @@
 function hideEnterView() {
     const enterView = document.querySelector('#EnterView');
-    enterView.style.opacity = '0';
-    enterView.style.transition = 'opacity 5s';
+    setTimeout(() => {
+      enterView.style.opacity = '0';
+      enterView.style.transition = 'opacity 2s';
+    }, 1500);
     setTimeout(() => {
       enterView.style.display = 'none';
-    }, 5000);
-
+    }, 4000);
   }
 
 function show(shown, hidden1, hidden2, hidden3) {
