@@ -538,15 +538,6 @@ body{
     font-family:"Neue Montreal","Hiragino Sans",Meiryo,sans-serif
 }
 
-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 svg {
     max-height: 90vh;
     max-width: 90vw;
@@ -559,4 +550,62 @@ svg {
     stroke-width: 10;
     stroke-linecap: round;
     fill: none;
+  }
+
+  @keyframes showTopText {
+    0% { transform: translate3d(0, 100%, 0); }
+    40%, 60% { transform: translate3d(0, 50%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+  @keyframes showBottomText {
+    0% { transform: translate3d(0, -100%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+  .animated-title {
+    height: 50vmin;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vmin;
+  }
+  .animated-title > div {
+    height: 50%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+  }
+  .animated-title > div div {
+    font-size: 12vmin;
+    padding: 1.5vmin 0;
+    position: absolute;
+  }
+  .animated-title > div div span {
+    display: block;
+  }
+  .animated-title > div.text-top {
+    border-bottom: 1vmin solid hsl(0, 0%, 90%);
+    top: 0;
+  }
+  .animated-title > div.text-top div {
+    font-weight:400;
+    animation: showTopText .5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    bottom: 0;
+    transform: translate(0, 100%);
+  }
+  .animated-title > div.text-top div span:first-child {
+    color: hsl(0, 0%, 90%);
+  }
+  .animated-title > div.text-bottom {
+    bottom: 0;
+  }
+  .animated-title > div.text-bottom div {
+    font-weight:200;
+    animation: showBottomText 0.5s;
+    animation-delay: 1.2s;
+    animation-fill-mode: forwards;
+    top: 0;
+    transform: translate(0, -100%);
   }
