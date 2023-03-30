@@ -547,28 +547,16 @@ video {
     object-fit: cover;
 }
 
-.container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 4vw;
-    user-select: none;
-}
-
-.container-front {
-    opacity: .1;
-    pointer-events: none;
-}
-
-#canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
+svg {
+    max-height: 90vh;
+    max-width: 90vw;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  path {
+    stroke: hsl(0, 0%, 70%);
+    stroke-width: 10;
+    stroke-linecap: round;
+    fill: none;
+  }
