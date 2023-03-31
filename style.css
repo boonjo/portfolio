@@ -271,7 +271,7 @@ body{
     height:100%;
     overflow-x: hidden; /* disable horizontal scrolling */
     overflow-y: auto; /* enable vertical scrolling */
-    mix-blend-mode:difference
+    mix-blend-mode:hard-light;
 }
 
 .content_inner{
