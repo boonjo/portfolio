@@ -590,10 +590,11 @@ svg {
     transform: translate(0, 100%);
   }
   .animated-title > div.text-top div span:first-child {
-   /* color: hsl(0, 0%, 90%); */
+    color: var(--c-text);
   }
   .animated-title > div.text-bottom {
     bottom: 0;
+    color: var(--c-text);
   }
   .animated-title > div.text-bottom div {
     font-weight:200;
