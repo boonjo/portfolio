@@ -99,7 +99,7 @@ body{
     overflow-x: hidden; /* disable horizontal scrolling */
     overflow-y: auto; /* enable vertical scrolling */
     background-color:var(--c-bg);
-    color:#fff;
+    color:var(--c-text);
     white-space:nowrap;
     transition-property:background-color;
     transition-duration:.9s;
