@@ -46,7 +46,7 @@ ol,ul{
     --pad: max(20px, 4vmin)
 }
 
-@media(prefers-color-scheme: dark){
+[data-theme="dark"] {
     :root{
         --c-bg: hsl(0, 0%, 5%);
         --c-text: hsl(0, 0%, 95%)
