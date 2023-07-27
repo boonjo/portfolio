@@ -40,17 +40,16 @@ ol,ul{
     list-style:none
 }
 
+/*
 :root{
     --c-bg: hsl(0, 0%, 90%);
     --c-text: hsl(0, 0%, 10%);
     --pad: max(20px, 4vmin)
 }
-
-[data-theme="dark"] {
-    :root{
-        --c-bg: hsl(0, 0%, 5%);
-        --c-text: hsl(0, 0%, 95%)
-    }
+*/
+:root{
+    --c-bg: hsl(0, 0%, 5%);
+    --c-text: hsl(0, 0%, 95%)
 }
 
 @font-face{
