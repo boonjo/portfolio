@@ -50,8 +50,7 @@ ol,ul{
 @media(prefers-color-scheme: dark) {
     :root{
         --c-bg: hsl(0, 0%, 5%);
-        --c-text: hsl(0, 0%, 95%)
-        --pad: max(20px, 4vmin)
+        --c-text: hsl(0, 0%, 95%);
     }
 }
 
