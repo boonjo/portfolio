@@ -578,7 +578,7 @@ svg {
     display: block;
   }
   .animated-title > div.text-top {
-    border-bottom: 1vmin solid hsl(0, 0%, 90%);
+    border-bottom: 1vmin solid var(--c-text);
     top: 0;
   }
   .animated-title > div.text-top div {
@@ -590,7 +590,7 @@ svg {
     transform: translate(0, 100%);
   }
   .animated-title > div.text-top div span:first-child {
-    color: hsl(0, 0%, 90%);
+   /* color: hsl(0, 0%, 90%); */
   }
   .animated-title > div.text-bottom {
     bottom: 0;
