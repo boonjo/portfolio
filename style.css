@@ -42,8 +42,8 @@ ol,ul{
 
 
 :root{
-    --c-bg: hsl(0, 0%, 90%);
-    --c-text: hsl(0, 0%, 10%);
+    --c-bg: hsl(0, 0%, 95%);
+    --c-text: hsl(0, 0%, 5%);
     --pad: max(20px, 4vmin)
 }
 
