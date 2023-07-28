@@ -100,7 +100,7 @@ body{
     background-color:var(--c-bg);
     color:var(--c-text);
     white-space:nowrap;
-    transition-property:background-color;
+    /*transition-property:background-color;*/
     transition-duration:.9s;
     transition-timing-function:cubic-bezier(0.1, 0.4, 0.2, 1)
 }
