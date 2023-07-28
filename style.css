@@ -195,7 +195,7 @@ body{
     right:var(--pad);
     top:var(--pad);
     bottom:var(--pad);
-    color:var(--c-bg);
+    mix-blend-mode:hard-light;
     pointer-events:none;
     overflow: hidden;
 } 
