@@ -195,7 +195,7 @@ body{
     right:var(--pad);
     top:var(--pad);
     bottom:var(--pad);
-    color:var(--c-text);
+    color:var(--c-bg);
     pointer-events:none;
     overflow: hidden;
 } 
