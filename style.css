@@ -39,7 +39,7 @@ ol,ul{
     list-style:none
 }
 
-@media(prefers-color-scheme: dark) {
+@media(prefers-color-scheme: light) {
     :root{
         --c-bg: hsl(0, 0%, 95%);
         --c-text: hsl(0, 0%, 5%);
