@@ -202,7 +202,7 @@ body{
   
 .frame_line{
     position:absolute;
-    background-color:var(--c-bg);
+    background-color:var(--c-text);
     opacity:.5
 }
 
