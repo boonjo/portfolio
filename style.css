@@ -297,7 +297,8 @@ body{
     z-index:10;
     left:calc(var(--pad)*2);
     top:calc(var(--pad)*2);
-    mix-blend-mode:difference
+    mix-blend-mode:difference;
+    color:var(--c-text);
 }
 
 .siteHeader_title{
