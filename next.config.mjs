@@ -6,10 +6,11 @@ const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
-module.exports = nextConfig
 
+// Setup MDX
 const withMDX = createMDX({
   extension: /\.mdx?$/,
 });
 
+// Export using ES module syntax only
 export default withMDX(nextConfig);
