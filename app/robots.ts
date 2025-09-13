@@ -1,3 +1,6 @@
+export const dynamic = "force-static"
+export const revalidate = 0
+
 import type { MetadataRoute } from 'next'
 import { WEBSITE_URL } from '@/lib/constants'
 
