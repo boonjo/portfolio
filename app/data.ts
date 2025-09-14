@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     name: 'Healthball',
     description:
       'Soccer players injury risk prediction application.',
-    link: 'https://pro.motion-primitives.com/',
+    link: 'https://github.com/boonjo/healthball/',
     id: 'project1',
   },
   {
