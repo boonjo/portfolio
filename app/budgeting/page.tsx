@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTheme } from 'next-themes'
 import { TaxCard } from './_components/TaxCard'
 import { SSCard } from './_components/SSCard'
@@ -11,15 +11,15 @@ import { MilestoneCard } from './_components/MilestoneCard'
 import { CATEGORY_LABELS, PERSIST_KEY, type BudgetResult, type StateOption } from './_components/types'
 import { fmt } from './_components/helpers'
 
-// ── Sidebar input styles ──────────────────────────────────────────────────────
+// ── Input styles — py-2.5 keeps touch targets ≥44px on mobile ────────────────
 const INPUT_CLS =
   'w-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 ' +
-  'dark:text-zinc-100 dark:placeholder-zinc-500 rounded-xl px-3 py-2 text-sm ' +
+  'dark:text-zinc-100 dark:placeholder-zinc-500 rounded-xl px-3 py-2.5 text-sm ' +
   'focus:outline-none focus:border-zinc-400'
 
 const INPUT_SM =
   'w-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 ' +
-  'dark:text-zinc-100 dark:placeholder-zinc-500 rounded-lg px-3 py-1.5 text-xs ' +
+  'dark:text-zinc-100 dark:placeholder-zinc-500 rounded-lg px-3 py-2.5 text-sm ' +
   'focus:outline-none focus:border-zinc-400'
 
 // ── Collapsible section ───────────────────────────────────────────────────────
@@ -43,7 +43,7 @@ function Collapsible({
       <button
         type="button"
         onClick={onToggle}
-        className="w-full text-left cursor-pointer text-sm font-medium text-zinc-700 dark:text-zinc-300 select-none flex items-center gap-1.5 min-w-0"
+        className="w-full text-left cursor-pointer text-sm font-medium text-zinc-700 dark:text-zinc-300 select-none flex items-center gap-1.5 min-w-0 py-1"
       >
         <span
           className={`inline-block text-xs shrink-0 transition-transform duration-150 ${
@@ -71,6 +71,7 @@ export default function BudgetPage() {
 
   // Prevent hydration mismatch for theme-dependent chart colors
   const [mounted, setMounted] = useState(false)
+  const resultsRef = useRef<HTMLElement>(null)
 
   // Server data
   const [states, setStates] = useState<StateOption[]>([])
@@ -222,6 +223,12 @@ export default function BudgetPage() {
         )
       }
       setResult(data)
+      // Scroll to results on mobile (stacked layout)
+      if (window.matchMedia('(max-width: 1023px)').matches) {
+        setTimeout(() => {
+          resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 50)
+      }
     } catch (e: unknown) {
       setFormError('Calculation failed: ' + (e instanceof Error ? e.message : String(e)))
     } finally {
@@ -251,10 +258,10 @@ export default function BudgetPage() {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 py-6 flex gap-5 items-start">
+      <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col lg:flex-row gap-5 items-start">
         {/* ── Sidebar ── */}
-        <aside className="w-72 shrink-0 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-5 space-y-4">
+        <aside className="w-full lg:w-72 lg:shrink-0 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-5 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="font-semibold text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wider">
                 Your Profile
@@ -288,7 +295,7 @@ export default function BudgetPage() {
             </div>
 
             {/* State + Age */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-300 mb-1">
                   State
@@ -451,17 +458,17 @@ export default function BudgetPage() {
             </Collapsible>
 
             {/* Actions */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 pt-1">
               <button
                 onClick={calculate}
-                className="flex-1 bg-zinc-900 hover:bg-zinc-700 dark:bg-zinc-100 dark:hover:bg-zinc-200 dark:text-zinc-900 active:scale-95 text-white font-semibold rounded-xl py-2.5 text-sm transition-all"
+                className="flex-1 bg-zinc-900 hover:bg-zinc-700 dark:bg-zinc-100 dark:hover:bg-zinc-200 dark:text-zinc-900 active:scale-95 text-white font-semibold rounded-xl py-3 text-sm transition-all"
               >
-                Calculate
+                {loading ? 'Calculating…' : 'Calculate'}
               </button>
               <button
                 onClick={resetForm}
                 title="Clear all inputs"
-                className="shrink-0 border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-400 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 rounded-xl px-3 text-sm transition-all active:scale-95"
+                className="shrink-0 border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-400 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 rounded-xl px-3.5 text-sm transition-all active:scale-95"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -481,13 +488,13 @@ export default function BudgetPage() {
         </aside>
 
         {/* ── Results ── */}
-        <main className="flex-1 min-w-0 space-y-4">
-          {/* Empty state */}
+        <main ref={resultsRef} className="flex-1 min-w-0 space-y-4 scroll-mt-20">
+          {/* Empty state — compact on mobile since form is right above */}
           {!result && !loading && (
-            <div className="flex flex-col items-center justify-center py-24 text-zinc-400 dark:text-zinc-500">
-              <span className="text-5xl mb-4">📊</span>
-              <p className="font-medium">Enter your details and click Calculate</p>
-              <p className="text-sm mt-1">
+            <div className="flex flex-col items-center justify-center py-12 lg:py-24 text-zinc-400 dark:text-zinc-500">
+              <span className="text-4xl lg:text-5xl mb-3">📊</span>
+              <p className="font-medium text-sm lg:text-base">Enter your details and tap Calculate</p>
+              <p className="text-xs lg:text-sm mt-1 text-center px-4">
                 Federal + state taxes · Spending guidance · Account health check
               </p>
             </div>
@@ -495,25 +502,10 @@ export default function BudgetPage() {
 
           {/* Loading */}
           {loading && (
-            <div className="flex items-center justify-center py-24 text-zinc-400 dark:text-zinc-500 gap-3">
-              <svg
-                className="animate-spin h-6 w-6 text-zinc-400"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8H4z"
-                />
+            <div className="flex items-center justify-center py-12 lg:py-24 text-zinc-400 dark:text-zinc-500 gap-3">
+              <svg className="animate-spin h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
               </svg>
               <span className="text-sm">Calculating…</span>
             </div>

@@ -27,7 +27,7 @@ const STATUS_ICON: Record<string, string> = { ok: '✓', over: '↑', under: '�
 
 export function CategoryCard({ result: d }: { result: BudgetResult }) {
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-6">
       <h2 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-1 text-sm">
         Recommended Budget Categories
       </h2>

@@ -35,7 +35,7 @@ export function InsightsCard({ insights }: { insights: Insight[] }) {
   })
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-6">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <h2 className="font-semibold text-zinc-800 dark:text-zinc-100 text-sm">
           Actionable Insights

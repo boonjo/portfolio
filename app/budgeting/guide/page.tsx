@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function Formula({ children }: { children: string }) {
   return (
@@ -57,6 +57,8 @@ const SECTIONS = [
 
 export default function GuidePage() {
   const [active, setActive] = useState('philosophy')
+  const [tocOpen, setTocOpen] = useState(false)
+  const sheetRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>('[data-section]')
@@ -72,44 +74,118 @@ export default function GuidePage() {
     return () => obs.disconnect()
   }, [])
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-8 flex gap-8 items-start">
-      {/* TOC sidebar */}
-      <nav className="w-52 shrink-0 sticky top-20 hidden lg:block">
-        <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-3">Contents</p>
-        <ul className="space-y-0.5 text-sm text-zinc-500 dark:text-zinc-400">
-          {SECTIONS.map((s) => (
-            <li key={s.id}>
-              <a href={`#${s.id}`} className={`block py-0.5 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50 ${active === s.id ? 'text-zinc-900 dark:text-zinc-50 font-semibold border-l-2 border-zinc-900 dark:border-zinc-100 pl-2 -ml-[10px]' : ''}`}>
-                {s.label}
-              </a>
-              {s.children.length > 0 && (
-                <ul className="pl-3 mt-0.5 space-y-0.5 text-xs">
-                  {s.children.map((c) => (
-                    <li key={c.id}>
-                      <a href={`#${c.id}`} className={`block py-0.5 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50 ${active === c.id ? 'text-zinc-900 dark:text-zinc-50 font-semibold' : ''}`}>
-                        {c.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
+  useEffect(() => {
+    document.body.style.overflow = tocOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [tocOpen])
 
-      {/* Article */}
-      <article className="flex-1 min-w-0 space-y-12 pb-16">
+  return (
+    <div className="max-w-7xl mx-auto">
+      {/* Mobile floating TOC button — fixed bottom right, only < lg */}
+      <div className="lg:hidden fixed bottom-6 right-4 z-30">
+        <button
+          onClick={() => setTocOpen(true)}
+          aria-label="Open table of contents"
+          className="flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium rounded-full px-4 py-3 shadow-xl active:scale-95 transition-transform"
+        >
+          <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h10" /></svg>
+          Contents
+        </button>
+      </div>
+
+      {/* Mobile bottom sheet */}
+      {tocOpen && (
+        <div className="lg:hidden fixed inset-0 z-40 flex flex-col justify-end" onClick={() => setTocOpen(false)}>
+          <div className="absolute inset-0 bg-black/40" />
+          <div
+            ref={sheetRef}
+            className="relative bg-white dark:bg-zinc-950 rounded-t-2xl shadow-2xl max-h-[72vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* drag handle */}
+            <div className="flex justify-center pt-3 pb-1 shrink-0">
+              <div className="w-10 h-1 rounded-full bg-zinc-200 dark:bg-zinc-700" />
+            </div>
+            <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 shrink-0">
+              <span className="font-semibold text-base text-zinc-900 dark:text-zinc-100">Contents</span>
+              <button
+                onClick={() => setTocOpen(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-full text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                aria-label="Close"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <ul className="overflow-y-auto py-3 px-3 space-y-0.5 pb-[env(safe-area-inset-bottom,16px)]">
+              {SECTIONS.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    onClick={() => setTocOpen(false)}
+                    className={`flex items-center px-3 py-3.5 rounded-xl text-[15px] transition-colors ${active === s.id ? 'bg-zinc-100 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-50 font-semibold' : 'text-zinc-600 dark:text-zinc-400'}`}
+                  >
+                    {s.label}
+                  </a>
+                  {s.children.length > 0 && (
+                    <ul className="pl-3 mt-0.5 space-y-0.5">
+                      {s.children.map((c) => (
+                        <li key={c.id}>
+                          <a
+                            href={`#${c.id}`}
+                            onClick={() => setTocOpen(false)}
+                            className={`flex items-center px-3 py-3 rounded-xl text-sm transition-colors ${active === c.id ? 'bg-zinc-100 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-50 font-semibold' : 'text-zinc-500 dark:text-zinc-500'}`}
+                          >
+                            {c.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Main content row */}
+      <div className="px-4 py-6 sm:py-8 flex gap-8 items-start">
+        {/* TOC sidebar — desktop only */}
+        <nav className="w-52 shrink-0 sticky top-20 hidden lg:block">
+          <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-3">Contents</p>
+          <ul className="space-y-0.5 text-sm text-zinc-500 dark:text-zinc-400">
+            {SECTIONS.map((s) => (
+              <li key={s.id}>
+                <a href={`#${s.id}`} className={`block py-0.5 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50 ${active === s.id ? 'text-zinc-900 dark:text-zinc-50 font-semibold border-l-2 border-zinc-900 dark:border-zinc-100 pl-2 -ml-[10px]' : ''}`}>
+                  {s.label}
+                </a>
+                {s.children.length > 0 && (
+                  <ul className="pl-3 mt-0.5 space-y-0.5 text-xs">
+                    {s.children.map((c) => (
+                      <li key={c.id}>
+                        <a href={`#${c.id}`} className={`block py-0.5 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50 ${active === c.id ? 'text-zinc-900 dark:text-zinc-50 font-semibold' : ''}`}>
+                          {c.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Article */}
+        <article className="flex-1 min-w-0 space-y-10 sm:space-y-12 pb-28 lg:pb-16">
         <div>
-          <h1 className="text-3xl font-extrabold text-zinc-900 dark:text-zinc-100 mb-3">How It Works</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100 mb-3">How It Works</h1>
           <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed max-w-2xl">
             Reference covering the methodology, data sources, and math behind every number displayed. Understanding the calculations helps use the tool more effectively and spot where situations might differ from the defaults explained below.
           </p>
         </div>
 
         {/* 1. Philosophy */}
-        <section id="philosophy" data-section="philosophy" className="scroll-mt-20">
+        <section id="philosophy" data-section="philosophy" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Philosophy</h2>
           <div className="space-y-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
             <p><strong className="text-zinc-800 dark:text-zinc-100">Transparent Math</strong> — Federal tax, state tax, FICA, and budget ranges are calculated from source formulas with no black boxes. The data files (<code className="text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-1 rounded text-xs">tax_rates.json</code>, <code className="text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-1 rounded text-xs">taxes.py</code>) are plain text and readable.</p>
@@ -120,10 +196,10 @@ export default function GuidePage() {
         </section>
 
         {/* 2. Tax Calculations */}
-        <section id="taxes" data-section="taxes" className="scroll-mt-20">
+        <section id="taxes" data-section="taxes" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Tax Calculations</h2>
           <div className="space-y-8">
-            <div id="federal" data-section="federal" className="scroll-mt-20">
+            <div id="federal" data-section="federal" className="scroll-mt-16 lg:scroll-mt-20">
               <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-3 text-base">Federal Income Tax</h3>
               <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-3">
                 <p>Federal income tax is <strong className="text-zinc-800 dark:text-zinc-100">progressive</strong>, with each bracket only applying to income <em>within</em> that bracket. The standard deduction is subtracted from gross income first to produce <em>taxable income</em>.</p>
@@ -143,7 +219,7 @@ Effective rate: 13.61%   Marginal rate: 22%`}</Formula>
               </div>
             </div>
 
-            <div id="fica" data-section="fica" className="scroll-mt-20">
+            <div id="fica" data-section="fica" className="scroll-mt-16 lg:scroll-mt-20">
               <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-3 text-base">FICA (Social Security &amp; Medicare)</h3>
               <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-3">
                 <p>FICA is separate from income tax and not affected by the standard deduction; it applies to <em>gross</em> wages directly.</p>
@@ -156,11 +232,11 @@ FICA total = SS + Medicare + Additional Medicare`}</Formula>
               </div>
             </div>
 
-            <div id="state-tax" data-section="state-tax" className="scroll-mt-20">
+            <div id="state-tax" data-section="state-tax" className="scroll-mt-16 lg:scroll-mt-20">
               <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-3 text-base">State Income Tax</h3>
               <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-3">
                 <p>States fall into three categories, each calculated differently:</p>
-                <div className="overflow-x-auto">
+                <div className="hidden sm:block overflow-x-auto">
                   <table className="w-full text-sm border-collapse">
                     <thead>
                       <tr className="bg-zinc-50 dark:bg-zinc-800 text-left">
@@ -188,6 +264,19 @@ FICA total = SS + Medicare + Additional Medicare`}</Formula>
                     </tbody>
                   </table>
                 </div>
+                <div className="sm:hidden space-y-2">
+                  {([
+                    { label: 'No tax', cls: 'text-emerald-700 dark:text-emerald-400', states: 'AK, FL, NV, NH, SD, TN, TX, WA, WY', calc: 'State tax = $0' },
+                    { label: 'Flat rate', cls: 'text-blue-700 dark:text-blue-400', states: 'AZ (2.5%), CO (4.4%), IL (4.95%), PA (3.07%), and others', calc: '(gross − deduction − exemptions) × flat_rate' },
+                    { label: 'Progressive', cls: 'text-purple-700 dark:text-purple-400', states: 'CA, NY, MN, NJ, OR, and others', calc: 'Bracket logic as federal, using state thresholds' },
+                  ] as { label: string; cls: string; states: string; calc: string }[]).map(r => (
+                    <div key={r.label} className="border border-zinc-100 dark:border-zinc-800 rounded-lg p-3 text-xs space-y-1">
+                      <div className={`font-semibold ${r.cls}`}>{r.label}</div>
+                      <div className="text-zinc-500 dark:text-zinc-400">{r.states}</div>
+                      <code className="block bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-700 dark:text-zinc-300 break-all">{r.calc}</code>
+                    </div>
+                  ))}
+                </div>
                 <p>Each state has its own standard deduction and personal exemption amounts. States currently phasing rates down (NC, GA, IA, IN, MO, MS, SC) have year-specific overrides applied automatically.</p>
                 <p className="text-xs text-zinc-400 dark:text-zinc-500 flex gap-2 flex-wrap"><Source>State Revenue Agencies</Source><Source href="https://taxfoundation.org/data/all/state/state-income-tax-rates/">Tax Foundation State Tax Data</Source></p>
               </div>
@@ -196,11 +285,12 @@ FICA total = SS + Medicare + Additional Medicare`}</Formula>
         </section>
 
         {/* 3. Budget Categories */}
-        <section id="budget" data-section="budget" className="scroll-mt-20">
+        <section id="budget" data-section="budget" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Budget Categories</h2>
           <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-4">
             <p>Recommended ranges are expressed as a <strong className="text-zinc-800 dark:text-zinc-100">percentage of gross monthly income</strong> (not net). Gross is used because it&apos;s the standard benchmark across all published frameworks, making comparisons consistent regardless of effective tax rate.</p>
-            <div className="overflow-x-auto">
+            {/* Desktop table */}
+            <div className="hidden sm:block overflow-x-auto">
               <table className="w-full text-xs border-collapse">
                 <thead>
                   <tr className="bg-zinc-50 dark:bg-zinc-800">
@@ -226,12 +316,37 @@ FICA total = SS + Medicare + Additional Medicare`}</Formula>
                 </tbody>
               </table>
             </div>
+            {/* Mobile category cards */}
+            <div className="sm:hidden divide-y divide-zinc-100 dark:divide-zinc-800 border border-zinc-100 dark:border-zinc-800 rounded-lg overflow-hidden text-xs">
+              {([
+                { cat: 'Housing', range: '25–30%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Transportation', range: '10–15%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Food', range: '10–15%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Healthcare', range: '5–10%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Utilities & Subscriptions', range: '4–8%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Life & Disability Insurance', range: '1–3%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Retirement Savings', range: '10–15%', bucket: 'Save', bucketCls: 'text-emerald-600 dark:text-emerald-400' },
+                { cat: 'Emergency Fund', range: '5–10%', bucket: 'Save', bucketCls: 'text-emerald-600 dark:text-emerald-400' },
+                { cat: 'Debt Repayment', range: '0–15%', bucket: 'Need', bucketCls: 'text-blue-600 dark:text-blue-400' },
+                { cat: 'Personal Care & Clothing', range: '2–5%', bucket: 'Want', bucketCls: 'text-amber-600 dark:text-amber-400' },
+                { cat: 'Entertainment & Fun', range: '3–8%', bucket: 'Want', bucketCls: 'text-amber-600 dark:text-amber-400' },
+                { cat: 'Giving & Charity', range: '0–10%', bucket: 'Want', bucketCls: 'text-amber-600 dark:text-amber-400' },
+              ] as { cat: string; range: string; bucket: string; bucketCls: string }[]).map(r => (
+                <div key={r.cat} className="flex items-center justify-between px-3 py-2.5 bg-white dark:bg-zinc-900">
+                  <span className="text-zinc-700 dark:text-zinc-200 font-medium">{r.cat}</span>
+                  <div className="flex items-center gap-3 shrink-0 ml-2">
+                    <span className={`${r.bucketCls} font-medium`}>{r.bucket}</span>
+                    <span className="font-mono text-zinc-500 dark:text-zinc-400 w-12 text-right">{r.range}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
             <p>The <strong>status indicator</strong> on each category (✓ on track / ↑ over / ↓ under) compares entered actual spending against the recommended range. &ldquo;Under&rdquo; isn&apos;t always good — spending significantly under on healthcare or insurance may indicate underinsurance rather than frugality.</p>
           </div>
         </section>
 
         {/* 4. Budget Frameworks */}
-        <section id="frameworks" data-section="frameworks" className="scroll-mt-20">
+        <section id="frameworks" data-section="frameworks" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Budget Frameworks</h2>
           <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-4">
             <p>The framework comparison table shows four established approaches applied to the given gross monthly income:</p>
@@ -262,7 +377,7 @@ FICA total = SS + Medicare + Additional Medicare`}</Formula>
         </section>
 
         {/* 5. Health Check */}
-        <section id="health" data-section="health" className="scroll-mt-20">
+        <section id="health" data-section="health" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Financial Health Check</h2>
           <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-4">
             <p>Enter account balances (checking, savings, retirement) to unlock the health check section. All three fields are optional.</p>
@@ -306,7 +421,7 @@ retirement_gap   = retirement_balance - retirement_target
         </section>
 
         {/* 6. Insights Engine */}
-        <section id="insights" data-section="insights" className="scroll-mt-20">
+        <section id="insights" data-section="insights" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Insights Engine</h2>
           <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-4">
             <p>Insights are generated automatically from entered spending and balances, tiered by urgency:</p>
@@ -325,49 +440,68 @@ retirement_gap   = retirement_balance - retirement_target
               </div>
             </div>
             <h4 className="font-semibold text-zinc-800 dark:text-zinc-100">What triggers each tier</h4>
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs border-collapse">
-                <thead>
-                  <tr className="bg-zinc-50 dark:bg-zinc-800">
-                    <th className="px-3 py-2 text-left font-semibold text-zinc-500 dark:text-zinc-400">Insight</th>
-                    <th className="px-3 py-2 text-left font-semibold text-zinc-500 dark:text-zinc-400">Condition</th>
-                    <th className="px-3 py-2 text-left font-semibold text-zinc-500 dark:text-zinc-400">Tier</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
-                  {([
-                    ['Spending exceeds net income','total_actual > net_monthly','text-red-600 dark:text-red-400','Critical'],
-                    ['No emergency fund','months_liquid < 1','text-red-600 dark:text-red-400','Critical'],
-                    ['Housing cost extreme','housing > 38% of gross','text-red-600 dark:text-red-400','Critical'],
-                    ['High debt burden','debt > 20% of gross','text-red-600 dark:text-red-400','Critical'],
-                    ['No retirement at 30+','retirement = $0 & age ≥ 30','text-red-600 dark:text-red-400','Critical'],
-                    ['Far behind retirement target','gap < −50% of gross','text-red-600 dark:text-red-400','Critical'],
-                    ['Housing slightly over','30% < housing ≤ 38%','text-amber-600 dark:text-amber-400','Warning'],
-                    ['Thin emergency fund','1 ≤ months_liquid < 3','text-amber-600 dark:text-amber-400','Warning'],
-                    ['Low retirement savings','0 < retirement < 10% gross','text-amber-600 dark:text-amber-400','Warning'],
-                    ['Very thin monthly margin','surplus < 5% of net','text-amber-600 dark:text-amber-400','Warning'],
-                    ['Emergency fund ≥ 3 months','months_liquid ≥ 3','text-emerald-600 dark:text-emerald-400','On Track'],
-                    ['Retirement ≥ 10% of gross','retirement ≥ 10%','text-emerald-600 dark:text-emerald-400','On Track'],
-                    ['Housing efficient','housing ≤ 25%','text-emerald-600 dark:text-emerald-400','On Track'],
-                    ['Strong surplus','surplus ≥ 20% of net','text-emerald-600 dark:text-emerald-400','On Track'],
-                  ] as [string, string, string, string][]).map(([insight, cond, cls, tier]) => (
-                    <tr key={insight}>
-                      <td className="px-3 py-2">{insight}</td>
-                      <td className="px-3 py-2 font-mono">{cond}</td>
-                      <td className={`px-3 py-2 ${cls}`}>{tier}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            {(() => {
+              const rows: [string, string, string, string][] = [
+                ['Spending exceeds net income','total_actual > net_monthly','text-red-600 dark:text-red-400','Critical'],
+                ['No emergency fund','months_liquid < 1','text-red-600 dark:text-red-400','Critical'],
+                ['Housing cost extreme','housing > 38% of gross','text-red-600 dark:text-red-400','Critical'],
+                ['High debt burden','debt > 20% of gross','text-red-600 dark:text-red-400','Critical'],
+                ['No retirement at 30+','retirement = $0 & age ≥ 30','text-red-600 dark:text-red-400','Critical'],
+                ['Far behind retirement target','gap < −50% of gross','text-red-600 dark:text-red-400','Critical'],
+                ['Housing slightly over','30% < housing ≤ 38%','text-amber-600 dark:text-amber-400','Warning'],
+                ['Thin emergency fund','1 ≤ months_liquid < 3','text-amber-600 dark:text-amber-400','Warning'],
+                ['Low retirement savings','0 < retirement < 10% gross','text-amber-600 dark:text-amber-400','Warning'],
+                ['Very thin monthly margin','surplus < 5% of net','text-amber-600 dark:text-amber-400','Warning'],
+                ['Emergency fund ≥ 3 months','months_liquid ≥ 3','text-emerald-600 dark:text-emerald-400','On Track'],
+                ['Retirement ≥ 10% of gross','retirement ≥ 10%','text-emerald-600 dark:text-emerald-400','On Track'],
+                ['Housing efficient','housing ≤ 25%','text-emerald-600 dark:text-emerald-400','On Track'],
+                ['Strong surplus','surplus ≥ 20% of net','text-emerald-600 dark:text-emerald-400','On Track'],
+              ]
+              return (
+                <>
+                  <div className="hidden sm:block overflow-x-auto">
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-zinc-50 dark:bg-zinc-800">
+                          <th className="px-3 py-2 text-left font-semibold text-zinc-500 dark:text-zinc-400">Insight</th>
+                          <th className="px-3 py-2 text-left font-semibold text-zinc-500 dark:text-zinc-400">Condition</th>
+                          <th className="px-3 py-2 text-left font-semibold text-zinc-500 dark:text-zinc-400">Tier</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                        {rows.map(([insight, cond, cls, tier]) => (
+                          <tr key={insight}>
+                            <td className="px-3 py-2">{insight}</td>
+                            <td className="px-3 py-2 font-mono">{cond}</td>
+                            <td className={`px-3 py-2 ${cls}`}>{tier}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="sm:hidden divide-y divide-zinc-100 dark:divide-zinc-800 border border-zinc-100 dark:border-zinc-800 rounded-lg overflow-hidden">
+                    {rows.map(([insight, cond, cls, tier]) => (
+                      <div key={insight} className="px-3 py-2.5 bg-white dark:bg-zinc-900 text-xs space-y-0.5">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-zinc-700 dark:text-zinc-200 font-medium">{insight}</span>
+                          <span className={`shrink-0 font-semibold ${cls}`}>{tier}</span>
+                        </div>
+                        <div className="font-mono text-zinc-400 dark:text-zinc-500">{cond}</div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )
+            })()}
             <p className="text-xs text-zinc-400 dark:text-zinc-500">Insights only appear when actual spending is entered. Balance insights (emergency fund, retirement) show whenever balances are entered.</p>
           </div>
         </section>
 
         {/* 7. Sources */}
-        <section id="sources" data-section="sources" className="scroll-mt-20">
+        <section id="sources" data-section="sources" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Data Sources</h2>
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-xl overflow-hidden">
+          {/* Desktop table */}
+          <div className="hidden sm:block bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-xl overflow-hidden">
             <table className="w-full text-xs">
               <thead>
                 <tr className="bg-zinc-50 dark:bg-zinc-800">
@@ -392,10 +526,35 @@ retirement_gap   = retirement_balance - retirement_target
               </tbody>
             </table>
           </div>
+          {/* Mobile source list */}
+          <div className="sm:hidden divide-y divide-zinc-100 dark:divide-zinc-800 border border-zinc-100 dark:border-zinc-800 rounded-xl overflow-hidden">
+            {([
+              ['Federal tax brackets (2025)', 'IRS Rev. Proc. 2024-40', 'https://www.irs.gov/pub/irs-drop/rp-24-40.pdf', 'Oct 2024'],
+              ['Federal tax brackets (2024)', 'IRS Rev. Proc. 2023-34', 'https://www.irs.gov/pub/irs-drop/rp-23-34.pdf', 'Nov 2023'],
+              ['SS wage base', 'SSA COLA Notice', 'https://www.ssa.gov/oact/cola/cbb.html', 'Annual (Oct)'],
+              ['State income tax rates', 'Tax Foundation + state agencies', 'https://taxfoundation.org/data/all/state/state-income-tax-rates/', 'Jan 2025'],
+              ['Emergency fund benchmark', 'CFPB Emergency Fund Guide', 'https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/', 'Ongoing'],
+              ['Retirement milestones', 'Fidelity Retirement Checkpoints', 'https://www.fidelity.com/viewpoints/retirement/how-much-do-i-need-to-retire', 'Ongoing'],
+              ['50/30/20 rule', 'Warren & Tyagi — All Your Worth (2005)', '', '2005'],
+              ['Baby Steps / debt framework', 'Dave Ramsey — Total Money Makeover', 'https://www.ramseysolutions.com/store/books/the-total-money-makeover', '2003'],
+              ['FIRE savings rate', 'Mr. Money Mustache / Fisker — ERE', 'https://www.mrmoneymustache.com/', '2010'],
+              ['Housing 28% rule', 'CFPB / FHA guidelines', 'https://www.consumerfinance.gov/owning-a-home/', 'Ongoing'],
+              ['Food cost benchmarks', 'USDA Low-Cost Food Plan', 'https://www.fns.usda.gov/research/cnpp/usda-food-plans/cost-food-monthly-reports', 'Monthly'],
+              ['DTI limits', 'CFPB DTI Guidance', 'https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/', 'Ongoing'],
+            ] as [string, string, string, string][]).map(([what, src, href, updated]) => (
+              <div key={what} className="px-3 py-3 bg-white dark:bg-zinc-900 text-xs">
+                <div className="font-medium text-zinc-700 dark:text-zinc-200 mb-0.5">{what}</div>
+                <div className="flex items-center justify-between gap-2">
+                  {href ? <A href={href}>{src}</A> : <span className="text-zinc-400">{src}</span>}
+                  <span className="text-zinc-400 whitespace-nowrap shrink-0">{updated}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* 8. Limitations */}
-        <section id="limitations" data-section="limitations" className="scroll-mt-20">
+        <section id="limitations" data-section="limitations" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Known Limitations</h2>
           <CalloutWarn><strong>This tool models a simplified, standardized taxpayer.</strong> Actual tax liability will differ if any of the following apply.</CalloutWarn>
           <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
@@ -422,7 +581,7 @@ retirement_gap   = retirement_balance - retirement_target
         </section>
 
         {/* 9. Tips */}
-        <section id="tips" data-section="tips" className="scroll-mt-20">
+        <section id="tips" data-section="tips" className="scroll-mt-16 lg:scroll-mt-20">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 pb-2 border-b border-zinc-100 dark:border-zinc-800">Tips for Best Results</h2>
           <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
@@ -449,7 +608,8 @@ retirement_gap   = retirement_balance - retirement_target
           <p>Budget benchmarks: CFPB, Fidelity, Vanguard, NerdWallet, Dave Ramsey, Elizabeth Warren (50/30/20).</p>
           <p>This guide is for informational and educational purposes only and does not constitute tax or financial advice.</p>
         </footer>
-      </article>
+        </article>
+      </div>
     </div>
   )
 }

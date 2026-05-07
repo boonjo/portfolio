@@ -14,11 +14,11 @@ function HStat({
   const display = value > 0 ? fmt(value) : '—'
   const cls = value > 0 ? colorClass : 'text-zinc-400 dark:text-zinc-500'
   return (
-    <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 text-center">
-      <p className="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wide mb-1">
+    <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-2.5 text-center min-w-0">
+      <p className="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wide mb-1 truncate">
         {label}
       </p>
-      <p className={`font-bold text-sm ${cls}`}>{display}</p>
+      <p className={`font-bold text-sm truncate ${cls}`}>{display}</p>
     </div>
   )
 }
@@ -72,14 +72,14 @@ export function HealthCard({ health: h }: { health: Health }) {
   }
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-6">
       <h2 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-4 text-sm">
         Account Health Check
       </h2>
 
       <div className="grid grid-cols-3 gap-3 mb-4">
         <HStat label="Checking" value={h.checking} colorClass="text-zinc-700 dark:text-zinc-200" />
-        <HStat label="Savings / HYSA" value={h.savings} colorClass="text-blue-600 dark:text-blue-400" />
+        <HStat label="Savings" value={h.savings} colorClass="text-blue-600 dark:text-blue-400" />
         <HStat label="Retirement" value={h.retirement_balance} colorClass="text-purple-600 dark:text-purple-400" />
       </div>
 

@@ -122,7 +122,7 @@ export function FrameworkCard({
   }, [d, isDark])
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-6">
       <h2 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-4 text-sm">
         Budget Framework Comparison
       </h2>

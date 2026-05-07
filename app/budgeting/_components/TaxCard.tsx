@@ -76,12 +76,12 @@ export function TaxCard({
   }, [t, isDark])
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-6">
       <h2 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-4 text-sm">
         Tax Breakdown · {t.state.name || ''} · {t.tax_year}
       </h2>
 
-      <div className="flex gap-5 flex-wrap items-start">
+      <div className="flex flex-col sm:flex-row gap-5 sm:flex-wrap sm:items-start items-center">
         {/* Doughnut chart */}
         <div className="flex flex-col items-center shrink-0">
           <canvas ref={canvasRef} width={140} height={140} />
@@ -171,7 +171,7 @@ export function TaxCard({
               value={raiseInput}
               onChange={(e) => setRaiseInput(e.target.value)}
               className="w-28 border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700
-                         dark:text-zinc-100 rounded-lg pl-5 pr-2 py-1 text-xs
+                         dark:text-zinc-100 rounded-lg pl-5 pr-2 py-2 text-xs
                          focus:outline-none focus:border-zinc-400"
             />
           </div>

@@ -4,7 +4,7 @@ import { fmt } from './helpers'
 
 export function SSCard({ ss, taxes }: { ss: SSEstimate; taxes: TaxResult }) {
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-4 sm:p-6">
       <h2 className="font-semibold text-zinc-800 dark:text-zinc-100 mb-1 text-sm">
         Social Security Estimate
       </h2>
@@ -38,7 +38,7 @@ export function SSCard({ ss, taxes }: { ss: SSEstimate; taxes: TaxResult }) {
           <p className="text-[10px] text-zinc-700 dark:text-zinc-300 font-semibold uppercase tracking-wide mb-2">
             Full Ret. Age · 67
           </p>
-          <p className="font-bold text-2xl text-zinc-900 dark:text-zinc-50">{fmt(ss.at_67)}</p>
+          <p className="font-bold text-xl text-zinc-900 dark:text-zinc-50">{fmt(ss.at_67)}</p>
           <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-0.5">per month</p>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2">{fmt(ss.annual_at_67)}/yr</p>
         </div>
