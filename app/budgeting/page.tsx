@@ -492,7 +492,6 @@ export default function BudgetPage() {
           {/* Empty state — compact on mobile since form is right above */}
           {!result && !loading && (
             <div className="flex flex-col items-center justify-center py-12 lg:py-24 text-zinc-400 dark:text-zinc-500">
-              <span className="text-4xl lg:text-5xl mb-3">📊</span>
               <p className="font-medium text-sm lg:text-base">Enter your details and tap Calculate</p>
               <p className="text-xs lg:text-sm mt-1 text-center px-4">
                 Federal + state taxes · Spending guidance · Account health check
