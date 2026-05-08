@@ -36,8 +36,8 @@ export const PROJECTS: Project[] = [
   {
     name: 'Healthball',
     description:
-      'Soccer players injury risk prediction application.',
-    link: 'https://github.com/boonjo/healthball/',
+      'Arsenal FC injury risk prediction — ML model on real injury data.',
+    link: '/healthball',
     id: 'project2',
   },
   {
