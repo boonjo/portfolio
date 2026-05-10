@@ -113,7 +113,11 @@ export function PlayerDrawer({ player, onClose }: Props) {
                     {features && (
                       <>
                         <Stat label="Recent (2yr)" value={String(features.recent_injuries ?? '—')} />
-                        <Stat label="Ligament" value={String(features.ligament_count ?? '—')} />
+                        <Stat label="Severity" value={
+                          features.severity_score != null
+                            ? String(Math.round(features.severity_score * 10) / 10)
+                            : '—'
+                        } />
                         <Stat label="Avg days/inj" value={
                           features.avg_days_out
                             ? String(Math.round(features.avg_days_out))
@@ -121,7 +125,7 @@ export function PlayerDrawer({ player, onClose }: Props) {
                         } />
                         <Stat label="Career apps" value={String(features.career_apps ?? '—')} />
                         <Stat label="Debut age" value={features.debut_age != null ? String(features.debut_age) : '—'} />
-                        <Stat label="Recent apps" value={String(features.recent_apps ?? '—')} />
+                        <Stat label="Recent mins" value={String(features.recent_minutes ?? '—')} />
                       </>
                     )}
                   </div>
