@@ -27,7 +27,13 @@ export async function GET(
       COALESCE(r.risk_level, 'low') AS risk_level,
       r.features
     FROM players p
-    LEFT JOIN risk_scores r ON r.player_id = p.player_id
+    LEFT JOIN LATERAL (
+      SELECT risk_score, risk_level, features
+      FROM risk_scores
+      WHERE player_id = p.player_id
+      ORDER BY computed_at DESC
+      LIMIT 1
+    ) r ON true
     WHERE p.player_id = ${playerId}
   `
 
