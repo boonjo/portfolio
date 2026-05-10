@@ -19,8 +19,14 @@ export async function GET() {
       COUNT(i.injury_id)::int       AS total_injuries,
       COALESCE(SUM(i.days_out), 0)::int AS total_days_out
     FROM players p
-    LEFT JOIN risk_scores r ON r.player_id = p.player_id
-    LEFT JOIN injuries    i ON i.player_id = p.player_id
+    LEFT JOIN LATERAL (
+      SELECT risk_score, risk_level
+      FROM risk_scores
+      WHERE player_id = p.player_id
+      ORDER BY computed_at DESC
+      LIMIT 1
+    ) r ON true
+    LEFT JOIN injuries i ON i.player_id = p.player_id
     GROUP BY p.player_id, p.name, p.position, p.age, p.nationality,
              p.currently_injured, r.risk_score, r.risk_level
     ORDER BY COALESCE(r.risk_score, 0) DESC
