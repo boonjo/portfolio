@@ -24,7 +24,7 @@ export type Injury = {
 }
 
 export type PlayerDetail = Player & {
-  features: Record<string, number> | null
+  features: Record<string, number | string> | null
   injuries: Injury[]
 }
 

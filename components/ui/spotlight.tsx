@@ -48,14 +48,17 @@ export function Spotlight({
   useEffect(() => {
     if (!parentElement) return
 
+    const onEnter = () => setIsHovered(true)
+    const onLeave = () => setIsHovered(false)
+
     parentElement.addEventListener('mousemove', handleMouseMove)
-    parentElement.addEventListener('mouseenter', () => setIsHovered(true))
-    parentElement.addEventListener('mouseleave', () => setIsHovered(false))
+    parentElement.addEventListener('mouseenter', onEnter)
+    parentElement.addEventListener('mouseleave', onLeave)
 
     return () => {
       parentElement.removeEventListener('mousemove', handleMouseMove)
-      parentElement.removeEventListener('mouseenter', () => setIsHovered(true))
-      parentElement.removeEventListener('mouseleave', () => setIsHovered(false))
+      parentElement.removeEventListener('mouseenter', onEnter)
+      parentElement.removeEventListener('mouseleave', onLeave)
     }
   }, [parentElement, handleMouseMove])
 

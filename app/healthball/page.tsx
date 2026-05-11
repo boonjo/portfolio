@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { useDebounce } from '@/hooks/useDebounce'
 import { Player, POSITION_ORDER } from './_components/types'
 import { PlayerCard } from './_components/PlayerCard'
 import { PlayerDrawer } from './_components/PlayerDrawer'
@@ -26,6 +27,7 @@ export default function HealthballPage() {
   const [filter, setFilter] = useState<Filter>('all')
   const [sort, setSort] = useState<Sort>('risk')
   const [search, setSearch] = useState('')
+  const debouncedSearch = useDebounce(search, 150)
 
   useEffect(() => {
     fetch('/api/healthball/players')
@@ -41,8 +43,8 @@ export default function HealthballPage() {
     } else if (filter !== 'all') {
       list = list.filter((p) => p.risk_level === filter)
     }
-    if (search.trim()) {
-      const q = search.toLowerCase()
+    if (debouncedSearch.trim()) {
+      const q = debouncedSearch.toLowerCase()
       list = list.filter(
         (p) => p.name.toLowerCase().includes(q) || p.position.toLowerCase().includes(q),
       )
@@ -54,7 +56,7 @@ export default function HealthballPage() {
       }
       return a.name.localeCompare(b.name)
     })
-  }, [players, filter, sort, search])
+  }, [players, filter, sort, debouncedSearch])
 
   const counts = useMemo(() => ({
     high:    players.filter((p) => p.risk_level === 'high').length,
