@@ -9,7 +9,7 @@ export async function GET(
 ) {
   const { id } = await params
   const playerId = parseInt(id, 10)
-  if (isNaN(playerId)) {
+  if (isNaN(playerId) || playerId <= 0) {
     return NextResponse.json({ error: 'invalid id' }, { status: 400 })
   }
 

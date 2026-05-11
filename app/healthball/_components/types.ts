@@ -24,7 +24,7 @@ export type Injury = {
 }
 
 export type PlayerDetail = Player & {
-  features: Record<string, number> | null
+  features: Record<string, number | string> | null
   injuries: Injury[]
 }
 
@@ -48,4 +48,4 @@ export const RISK_GAUGE_COLOR: Record<RiskLevel, string> = {
   high:   '#ef4444',
 }
 
-export const POSITION_ORDER = ['GK', 'RB', 'CB', 'LB', 'CM', 'CAM', 'RW', 'LW', 'CF']
+export const POSITION_ORDER = ['GK', 'RB', 'CB', 'LB', 'WB', 'CM', 'CAM', 'IW', 'RW', 'LW', 'WF', 'CF']

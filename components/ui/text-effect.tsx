@@ -296,10 +296,10 @@ export function TextEffect({
   )
 }
 
-export function TextEffectPerChar({ children, per = 'char', preset = 'fade', ...props }: TextEffectProps) {
+export function TextEffectPerChar({ children, per = 'char', preset = 'fade-in-blur', className, ...props }: TextEffectProps) {
   return (
-    <TextEffect per='char' preset='fade-in-blur' className="text-4xl">
-      Joonbo Shim Portfolio
+    <TextEffect per={per} preset={preset} className={className} {...props}>
+      {children}
     </TextEffect>
-  );
+  )
 }
