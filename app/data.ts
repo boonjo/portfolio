@@ -27,24 +27,31 @@ type SocialLink = {
 
 export const PROJECTS: Project[] = [
   {
+    name: 'Price Tracker',
+    description:
+      'Price Tracker for shopping items',
+    link: '/tracker',
+    id: 'project1',
+  },
+  {
     name: 'Budget Planner',
     description:
       'Personal finance dashboard for budget analysis.',
-    link: 'https://joonbo.com/budgeting',
-    id: 'project1',
+    link: '/budgeting',
+    id: 'project2',
   },
   {
     name: 'Healthball',
     description:
       'Arsenal FC injury risk prediction — ML model on real injury data.',
     link: '/healthball',
-    id: 'project2',
+    id: 'project3',
   },
   {
     name: 'Website Checker',
     description: 'A lightweight monitoring tool that checks website availability and notifies via Slack when downtime is detected.',
     link: 'https://github.com/boonjo/WebsiteChecker/',
-    id: 'project3',
+    id: 'project4',
   },
 ]
 
