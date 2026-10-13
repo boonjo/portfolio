@@ -2,4 +2,4 @@ psycopg2-binary==2.9.9
 requests==2.33.0
 beautifulsoup4==4.12.3
 resend==2.4.0
-python-dotenv==1.2.2
+python-dotenv==1.2.4
