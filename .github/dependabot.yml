@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/scraper" # Tells Dependabot to look inside your scraper folder
+    schedule:
+      interval: "daily"
